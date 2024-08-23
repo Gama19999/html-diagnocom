@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import {LoginComponent} from "./login/login.component";
-import {MainComponent} from "./main/main.component";
-import {DisclaimerComponent} from "./main/disclaimer/disclaimer.component";
+import {LoginComponent} from './login/login.component';
+import {MainComponent} from './main/main.component';
+import {DisclaimerComponent} from './main/disclaimer/disclaimer.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
