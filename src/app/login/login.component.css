@@ -1,0 +1,31 @@
+.login-bg {
+  background: url("../../assets/images/login_bk.webp") 100% 100% / 100% 100% no-repeat;
+}
+
+.login-grid {
+  grid-template-rows: 20% 30% 15% 12% 1fr;
+}
+
+.login-grid > * { grid-column: 2; }
+
+.login-logo {
+  background: url("../../assets/images/diagnocom.webp") 50% 50% / 10% 60% no-repeat;
+}
+
+/**** TEXTS ****/
+
+.login-title {
+  font-weight: bold;
+  font-size: 5rem;
+}
+
+.login-txt-1 {
+  grid-column: 1 / 4;
+  font-size: 2rem;
+  text-align: center;
+  width: 50%;
+}
+
+.login-txt-2 {
+  font-size: 1.2rem;
+}

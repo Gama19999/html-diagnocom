@@ -1,1 +1,75 @@
 /* You can add global styles to this file, and also import other style files */
+
+/**** GENERAL ****/
+* {
+  border: 0;
+  margin: 0;
+  font-family: "Madimi";
+  font-weight: bold;
+}
+html, body { height: 100%; }
+
+
+/**** DISPLAYS ****/
+.grid {
+  display: grid;
+  grid-template-columns: 5% 1fr 5%;
+}
+.flex {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+/**** POSITIONING ****/
+.full {
+  height: 100%;
+  width: 100%;
+}
+.center {
+  justify-items: center;
+  align-items: center;
+}
+.center-v { align-items: center; }
+
+
+/**** CLASSES ****/
+.btn {
+  border: 0;
+  border-radius: 15px;
+  width: fit-content;
+  padding: 0.6rem 2rem;
+  box-shadow: 3px 4px 5px 0 rgba(0,0,0,0.4);
+  transition: all 0.2s;
+  cursor: pointer;
+}
+.btn:active {
+  box-shadow: 1px 1px 5px 0 rgba(0,0,0,0.5), inset 0 0 5px 100px rgba(0,0,0,0.1);
+}
+
+/**** FONTS ****/
+@font-face {
+  font-family: "Madimi";
+  src: url("./assets/fonts/madimione.ttf") format("truetype");
+}
+
+
+/**** MEDIA QUERIES ****/
+@media (max-width: 1000px) {
+  .login-title { font-size: 4rem !important; }
+  .login-logo {
+    background: url("./assets/images/diagnocom.webp") 50% 50% / 40% 60% no-repeat !important;
+  }
+  .login-txt-1 {
+    font-size: 1.5rem !important;
+    width: 100% !important;
+  }
+  .disclaimer-txt-1 {
+    width: 90% !important;
+    font-size: 1rem !important;
+    line-height: 2.2rem !important;
+  }
+  .disclaimer-control { width: 100% !important; }
+}
+
+
+

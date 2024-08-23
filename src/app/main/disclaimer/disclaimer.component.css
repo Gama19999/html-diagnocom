@@ -1,0 +1,14 @@
+.disclaimer-txt-1 {
+  width: 50%;
+  text-align: justify;
+  font-size: 1.5rem;
+  line-height: 2.6rem;
+  grid-column: 2;
+}
+
+.disclaimer-control {
+  grid-column: 2;
+  grid-row: 2;
+  width: 50%;
+  justify-content: space-evenly;
+}

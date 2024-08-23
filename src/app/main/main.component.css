@@ -1,0 +1,27 @@
+.main-bg {
+  background: url("../../assets/images/se1f_bk.webp") 50% 50% / 100% 100% no-repeat;
+}
+
+.main-grid {
+  grid-template-rows: 13% 1fr 7%;
+}
+
+.main-grid > *:not(.main-header) { grid-column: 2; }
+
+.main-header {
+  grid-column: 1 / 4;
+  background-color: rgba(0,0,0,0.2);
+}
+
+.main-app-logo {
+  width: 4rem;
+  height: 4rem;
+  background: url("../../assets/images/diagnocom.webp") 50% 50% / 100% 100% no-repeat;
+  margin-left: 1.7rem;
+}
+
+/**** TEXTS ****/
+.main-txt-app {
+  font-size: 2rem;
+  margin-left: 2rem;
+}
