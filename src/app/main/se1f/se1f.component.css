@@ -1,0 +1,18 @@
+.se1f-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 5rem 3rem 1fr;
+  justify-items: left;
+}
+
+.se1f-txt-title {
+  font-size: 1.9rem;
+}
+
+.se1f-txt-directions {
+  font-size: 1.2rem;
+}
+
+.se1f-options {
+  align-content: space-around;
+}

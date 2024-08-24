@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
+import { ActivatedRoute, Router } from '@angular/router';
+import { Se1fComponent } from './se1f/se1f.component';
 
 @Component({
   selector: 'app-main',
@@ -7,12 +8,18 @@ import {ActivatedRoute, Router} from "@angular/router";
   styleUrl: './main.component.css'
 })
 export class MainComponent {
-  accepted: any = undefined;
+  accepted: any = false;
+  frame: any = undefined;
 
   constructor(private router: Router, private route: ActivatedRoute) {}
 
   disclaimerCheck(choice: boolean) {
     if (!choice) this.router.navigate(['/login'], { relativeTo: this.route });
-    else this.accepted = choice;
+    this.accepted = choice;
+    this.displayFrame();
+  }
+
+  private displayFrame() {
+    this.frame = Se1fComponent;
   }
 }

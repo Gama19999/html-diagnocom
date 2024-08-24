@@ -4,7 +4,10 @@
     <span class="main-app-logo"></span>
   </div>
 
-  <app-disclaimer *ngIf="!accepted" class="grid center full" style="grid-row: 2 / 4" (choice)="disclaimerCheck($event)"/>
+  <app-disclaimer *ngIf="!accepted" class="grid center full scroll"
+                  style="grid-row: 2 / 4; grid-template-rows: 1fr 15%"
+                  (choice)="disclaimerCheck($event)">
+  </app-disclaimer>
 
-
+  <ng-container *ngComponentOutlet="frame"></ng-container>
 </div>
