@@ -53,14 +53,17 @@ app-se1f {
   transition: all 0.2s;
   cursor: pointer;
 }
-.btn:active,
-.option:active {
+.btn:active, .btn:focus,
+.option:active, .option:focus {
+  outline: 0;
   box-shadow: 1px 1px 5px 0 rgba(0,0,0,0.5), inset 0 0 5px 100px rgba(0,0,0,0.1);
 }
 .option {
   border: 0;
   width: 50%;
+  height: fit-content;
   padding: 1rem;
+  margin-right: 1rem;
   border-radius: 15px;
   box-shadow: 3px 4px 5px 0 rgba(0,0,0,0.4);
   text-align: center;

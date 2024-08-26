@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
-import {ChainLogic} from '../models/chain-logic.interface';
+import { ChainLogic } from '../models/chain-logic.interface';
 
-import {api} from '../../enviroments/environment';
+import { api } from '../../enviroments/environment';
 
 @Injectable({ providedIn: 'root' })
-export class ChainingService implements ChainLogic {
+export class ChainingLogicService implements ChainLogic {
   private _facts: string[] = [];
 
   constructor(private http: HttpClient) { }

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { ChainingService } from '../../services/chaining.service';
+import { NgForm } from '@angular/forms';
+
+import { ChainingLogicService } from '../../services/chaining.service';
 
 @Component({
   selector: 'app-se1f',
@@ -8,12 +10,13 @@ import { ChainingService } from '../../services/chaining.service';
 })
 export class Se1fComponent {
 
-  constructor(private chainingService: ChainingService) {}
+  constructor(private chainingLogicService: ChainingLogicService) {}
 
-  callForwardChaining(event: any): void {
-    let choice = (<HTMLSpanElement> event.target).getAttribute('data-value');
-    let data = [false, false, false, false, false, false].fill(true, +choice!, +choice!+1);
-    this.chainingService.doForwardChain(data);
+  validateChoices(element: any, form: NgForm) {
+    let controls = form.form.controls;
+    let clicked = (<HTMLSpanElement> element).children[0].getAttribute('name')!;
+    controls[clicked].setValue('si');
+    for (let control in controls) if (control !== clicked) controls[control].setValue('no');
+    this.chainingLogicService.doForwardChain(form.form.value);
   }
-
 }

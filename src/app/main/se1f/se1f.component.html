@@ -1,12 +1,14 @@
 <section class="full center se1f-grid">
   <span class="se1f-txt-title">Lugar del malestar</span>
   <span class="se1f-txt-directions">Seleccione la opci&oacute;n que identifique donde presenta la incomodidad.</span>
-  <div class="se1f-options full flex" (click)="callForwardChaining($event)">
-    <span class="option" data-value="0">En la cabeza</span>
-    <span class="option" data-value="1">Al respirar</span>
-    <span class="option" data-value="2">Tras comer o ir al sanitario</span>
-    <span class="option" data-value="3">En el abdomen o espalda</span>
-    <span class="option" data-value="4">Al orinar</span>
-    <span class="option" data-value="5">En la piel</span>
+  <div class="se1f-options full">
+    <form class="full flex se1f-form" #se1f="ngForm" (click)="validateChoices($event.target, se1f)">
+      <span class="option">En la cabeza<input type="hidden" name="afeccionCabeza" ngModel /></span>
+      <span class="option">Al respirar<input type="hidden" name="afeccionRespiratoria" ngModel /></span>
+      <span class="option">Tras comer o ir al sanitario<input type="hidden" name="afeccionDigestiva" ngModel /></span>
+      <span class="option">En el abdomen o espalda<input type="hidden" name="afeccionInterna" ngModel /></span>
+      <span class="option">Al orinar<input type="hidden" name="afeccionUrinaria" ngModel /></span>
+      <span class="option">En la piel<input type="hidden" name="afeccionPiel" ngModel /></span>
+    </form>
   </div>
 </section>
