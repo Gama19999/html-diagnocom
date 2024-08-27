@@ -11,4 +11,5 @@
       <span class="option">En la piel<input type="hidden" name="afeccionPiel" ngModel /></span>
     </form>
   </div>
+  <p-toast [life]="5000" [breakpoints]="{'1000px': {width: '95%', right: '2.5%'}}" (onClose)="changeFrame()" />
 </section>

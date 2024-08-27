@@ -1,26 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 
-import { Se1fComponent } from './se1f/se1f.component';
+import { FrameService } from '../services/frame.service';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
-export class MainComponent {
-  accepted: any = false;
-  frame: any = undefined;
+export class MainComponent implements OnInit, OnDestroy {
+  accepted: boolean = false;
+  frame: any;
 
-  constructor(private router: Router, private route: ActivatedRoute) {}
+  private frameSubs!: Subscription;
+
+  constructor(private router: Router, private route: ActivatedRoute, private frameService: FrameService) {}
+
+  ngOnInit() {
+    this.frameSubs = this.frameService.frame.subscribe(component => this.frame = component);
+  }
 
   disclaimerCheck(choice: boolean) {
     if (!choice) this.router.navigate(['/login'], { relativeTo: this.route });
     this.accepted = choice;
-    this.displayFrame();
   }
 
-  private displayFrame() {
-    this.frame = Se1fComponent;
+  ngOnDestroy() {
+    if (this.frameSubs) this.frameSubs.unsubscribe();
   }
 }

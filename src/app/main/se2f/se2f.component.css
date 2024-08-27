@@ -1,0 +1,28 @@
+.se2f-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 10% 5% 85%;
+  justify-items: left;
+}
+
+.se2f-txt-title {
+  font-size: 1.9rem;
+}
+
+.se2f-txt-directions {
+  font-size: 1.2rem;
+}
+
+.se2f-options {
+  align-content: space-around;
+}
+
+.se2f-form {
+  align-content: space-around;
+  overflow-y: scroll;
+  padding: 1rem 0;
+}
+
+.gap {
+  margin-bottom: 1rem;
+}

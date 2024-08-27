@@ -1,22 +1,48 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 
-import { ChainingLogicService } from '../../services/chaining.service';
+import { ChainingDataService } from '../../services/chaining-data.service';
+import { FrameService } from '../../services/frame.service';
+import { Fact } from '../../models/fact.model';
+import { Se2fComponent } from '../se2f/se2f.component';
 
 @Component({
   selector: 'app-se1f',
   templateUrl: './se1f.component.html',
-  styleUrl: './se1f.component.css'
+  styleUrl: './se1f.component.css',
+  providers: [MessageService]
 })
-export class Se1fComponent {
+export class Se1fComponent implements OnInit, OnDestroy {
+  private knowledgeSubs!: Subscription;
+  private knowledge!: Fact;
 
-  constructor(private chainingLogicService: ChainingLogicService) {}
+  constructor(private chainingDataService: ChainingDataService, private messageService: MessageService,
+              private frameService: FrameService) {}
+
+  ngOnInit() {
+    this.knowledgeSubs = this.chainingDataService.knowledge.subscribe(data => this.displayKnowledge(data));
+  }
+
+  private displayKnowledge(data: Fact) {
+    this.knowledge = data;
+    this.messageService.add({ severity: 'info', summary: '1er Encadenamiento', detail: this.knowledge.afeccion });
+  }
 
   validateChoices(element: any, form: NgForm) {
     let controls = form.form.controls;
     let clicked = (<HTMLSpanElement> element).children[0].getAttribute('name')!;
     controls[clicked].setValue('si');
     for (let control in controls) if (control !== clicked) controls[control].setValue('no');
-    this.chainingLogicService.doForwardChain(form.form.value);
+    this.chainingDataService.doForwardChain(form.form.value);
+  }
+
+  changeFrame() {
+    this.frameService.frame.next(Se2fComponent);
+  }
+
+  ngOnDestroy() {
+    if (this.knowledgeSubs) this.knowledgeSubs.unsubscribe();
   }
 }

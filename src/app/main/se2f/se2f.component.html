@@ -1,0 +1,14 @@
+<section class="full center se2f-grid">
+  <span class="se2f-txt-title">S&iacute;ntomas presentes</span>
+  <span class="se2f-txt-directions">Seleccione las opciones que identifique como s&iacute;ntomas.</span>
+  <div class="se2f-options full">
+    <form class="full flex se2f-form" #se2f="ngForm">
+      @for (opt of options | keyvalue; track opt.key; let n = $count) {
+        <span class="option" [ngClass]="{'gap': n > 6}" (click)="validateChoice(opt.value.name, se2f)">
+          {{opt.value.txt}}<input type="hidden" name="{{opt.value.name}}" [(ngModel)]="opt.value.value" />
+        </span>
+      }
+    </form>
+  </div>
+  <p-toast [life]="5000" [breakpoints]="{'1000px': {width: '95%', right: '2.5%'}}" />
+</section>

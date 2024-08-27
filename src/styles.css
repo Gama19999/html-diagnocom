@@ -1,4 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+/**** IMPORTS ****/
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+
+
+/* Order */
+@layer reset, primeng;
+/* Reset CSS */
+@layer reset {
+  /* CSS to Reset */
+}
 
 /**** GENERAL ****/
 * {
@@ -12,7 +23,7 @@ html, body { height: 100%; }
 
 
 /**** COMPONENTS ****/
-app-se1f {
+app-se1f, app-se2f {
   grid-column: 2;
   grid-row: 2 / 4;
   height: 100%;
@@ -70,6 +81,16 @@ app-se1f {
   background-color: aliceblue;
   cursor: pointer;
 }
+.p-toast-summary, .p-toast-detail {
+  font-weight: normal !important;
+}
+.p-toast-message-icon {
+  margin-right: 1rem;
+}
+.p-toast-message {
+  margin-bottom: 1rem;
+}
+
 
 /**** FONTS ****/
 @font-face {
@@ -99,6 +120,12 @@ app-se1f {
   .option {
     width: 100% !important;
     padding: 0.5rem 0;
+  }
+  .se2f-txt-directions {
+    font-size: 1rem !important;
+  }
+  .se2f-grid {
+    grid-template-rows: 10% 7% 83% !important;
   }
 }
 
