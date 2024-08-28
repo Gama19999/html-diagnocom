@@ -64,8 +64,8 @@ app-se1f, app-se2f {
   transition: all 0.2s;
   cursor: pointer;
 }
-.btn:active, .btn:focus,
-.option:active, .option:focus {
+.btn:active,
+.option:active {
   outline: 0;
   box-shadow: 1px 1px 5px 0 rgba(0,0,0,0.5), inset 0 0 5px 100px rgba(0,0,0,0.1);
 }
@@ -80,6 +80,9 @@ app-se1f, app-se2f {
   text-align: center;
   background-color: aliceblue;
   cursor: pointer;
+}
+.selected {
+  box-shadow: 1px 1px 5px 0 rgba(0,0,0,0.5), inset 0 0 5px 100px rgba(0,0,0,0.1);
 }
 .p-toast-summary, .p-toast-detail {
   font-weight: normal !important;
@@ -124,10 +127,12 @@ app-se1f, app-se2f {
   .se2f-txt-directions {
     font-size: 1rem !important;
   }
-  .se2f-grid {
-    grid-template-rows: 10% 7% 83% !important;
-  }
 }
 
+@media (max-height: 670px) {
+  .se2f-txt-directions {
+    font-size: 0.88rem !important;
+  }
+}
 
 

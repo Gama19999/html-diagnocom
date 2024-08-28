@@ -26,7 +26,7 @@ export class ChainingDataService {
   }
 
   private handleResponse(response: MessageResponse) {
-    this._knowledge.afeccion = response.data[0].afeccion;
+    this._knowledge.afeccion = response.data[0].afeccion ? response.data[0].afeccion : this._knowledge.afeccion;
     this._knowledge.enfermedad = response.data[0].enfermedad;
     this.options.next(response.data[1]);
     this.knowledge.next(this._knowledge);

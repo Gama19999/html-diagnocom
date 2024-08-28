@@ -3,7 +3,7 @@
 }
 
 .main-grid {
-  grid-template-rows: 13% 1fr 7%;
+  grid-template-rows: 10% 1fr 7%;
 }
 
 .main-grid > *:not(.main-header) { grid-column: 2; }
@@ -14,8 +14,8 @@
 }
 
 .main-app-logo {
-  width: 4rem;
-  height: 4rem;
+  width: 3.5rem;
+  height: 3.5rem;
   background: url("../../assets/images/diagnocom.webp") 50% 50% / 100% 100% no-repeat;
   margin-left: 1.7rem;
 }

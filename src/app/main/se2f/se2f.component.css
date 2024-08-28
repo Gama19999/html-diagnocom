@@ -1,7 +1,7 @@
 .se2f-grid {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 10% 5% 85%;
+  grid-template-rows: 8% 5% 80% 7%;
   justify-items: left;
 }
 
@@ -22,7 +22,13 @@
   overflow-y: scroll;
   padding: 1rem 0;
 }
-
+.se2f-controls {
+  align-items: center;
+}
+.se2f-controls .btn {
+  height: fit-content;
+  margin-right: 2rem;
+}
 .gap {
   margin-bottom: 1rem;
 }

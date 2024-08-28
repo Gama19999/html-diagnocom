@@ -3,12 +3,17 @@
   <span class="se2f-txt-directions">Seleccione las opciones que identifique como s&iacute;ntomas.</span>
   <div class="se2f-options full">
     <form class="full flex se2f-form" #se2f="ngForm">
+      <input type="hidden" name="afeccion" [(ngModel)]="afeccion" />
       @for (opt of options | keyvalue; track opt.key; let n = $count) {
-        <span class="option" [ngClass]="{'gap': n > 6}" (click)="validateChoice(opt.value.name, se2f)">
+        <span id="{{opt.value.name}}" class="option" [ngClass]="{'gap': n > 6}" (click)="validateChoice(opt.value.name, se2f)">
           {{opt.value.txt}}<input type="hidden" name="{{opt.value.name}}" [(ngModel)]="opt.value.value" />
         </span>
       }
     </form>
+  </div>
+  <div class="se2f-controls full flex">
+    <input type="button" class="btn" value="Regresar" (click)="returnTo1stFrame()" />
+    <input type="button" class="btn" value="Ver resultado" (click)="callForwardChaining(se2f)" />
   </div>
   <p-toast [life]="5000" [breakpoints]="{'1000px': {width: '95%', right: '2.5%'}}" />
 </section>
