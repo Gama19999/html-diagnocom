@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { FrameService } from '../../services/frame.service';
 import { Se1fComponent } from '../se1f/se1f.component';
@@ -9,14 +10,13 @@ import { Se1fComponent } from '../se1f/se1f.component';
   styleUrl: './disclaimer.component.css'
 })
 export class DisclaimerComponent {
-  @Output('choice') event: EventEmitter<boolean> = new EventEmitter();
 
-  constructor(private frameService: FrameService) {}
+  constructor(private frameService: FrameService, private router: Router, private route: ActivatedRoute) {}
 
   aceptoClicked() {
-    this.event.emit(true);
+    this.frameService.disclaimer.next(true);
     this.frameService.frame.next(Se1fComponent);
   }
 
-  salirClicked = () => this.event.emit(false);
+  salirClicked = () => this.router.navigate(['/login'], { relativeTo: this.route });
 }

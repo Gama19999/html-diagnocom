@@ -1,31 +1,29 @@
-.se1f-grid {
+.result-grid {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 8% 5% 80% 7%;
   justify-items: left;
 }
 
-.se1f-txt-title {
+.result-txt-title {
   font-size: 1.9rem;
 }
 
-.se1f-txt-directions {
+.result-txt-directions {
   font-size: 1.2rem;
+  width: 50%;
 }
 
-.se1f-options {
+.result-content {
   align-content: space-around;
 }
 
-.se1f-form {
-  align-content: space-around;
-}
-
-.se1f-controls {
+.result-controls {
   align-items: center;
 }
 
-.se1f-controls .btn {
+.result-controls .btn {
   height: fit-content;
   margin-right: 2rem;
 }
+

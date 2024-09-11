@@ -3,7 +3,7 @@
   <span class="se2f-txt-directions">Seleccione las opciones que identifique como s&iacute;ntomas.</span>
   <div class="se2f-options full">
     <form class="full flex se2f-form" #se2f="ngForm">
-      <input type="hidden" name="afeccion" [(ngModel)]="afeccion" />
+      <input type="hidden" name="afeccion" [(ngModel)]="knowledge.afeccion" />
       @for (opt of options | keyvalue; track opt.key; let n = $count) {
         <span id="{{opt.value.name}}" class="option" [ngClass]="{'gap': n > 6}" (click)="validateChoice(opt.value.name, se2f)">
           {{opt.value.txt}}<input type="hidden" name="{{opt.value.name}}" [(ngModel)]="opt.value.value" />

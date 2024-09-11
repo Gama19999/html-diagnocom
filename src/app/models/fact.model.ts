@@ -6,7 +6,7 @@ export class Fact {
   }
 
   set afeccion(value: string) {
-    this._afeccion = value ? value : this.afeccion;
+    this._afeccion = value || value === '' ? value : this._afeccion;
   }
 
   get enfermedad(): string {
@@ -14,6 +14,6 @@ export class Fact {
   }
 
   set enfermedad(value: string) {
-    this._enfermedad = value ? value : this._enfermedad;
+    this._enfermedad = value || value === '' ? value : this._enfermedad;
   }
 }

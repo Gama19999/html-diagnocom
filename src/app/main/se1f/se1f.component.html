@@ -11,5 +11,8 @@
       <span class="option">En la piel<input type="hidden" name="afeccionPiel" ngModel /></span>
     </form>
   </div>
+  <div class="se1f-controls full flex">
+    <input type="button" class="btn" value="Regresar" (click)="returnToDisclaimer()" />
+  </div>
   <p-toast [life]="5000" [breakpoints]="{'1000px': {width: '95%', right: '2.5%'}}" (onClose)="changeFrame()" />
 </section>

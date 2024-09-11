@@ -23,7 +23,7 @@ html, body { height: 100%; }
 
 
 /**** COMPONENTS ****/
-app-se1f, app-se2f {
+app-se1f, app-se2f, app-result {
   grid-column: 2;
   grid-row: 2 / 4;
   height: 100%;
@@ -47,11 +47,13 @@ app-se1f, app-se2f {
   height: 100%;
   width: 100%;
 }
+.full-w { width: 100%; }
 .center {
   justify-items: center;
   align-items: center;
 }
 .center-v { align-items: center; }
+.center-txt { text-align: center; }
 
 
 /**** CLASSES ****/
@@ -126,6 +128,16 @@ app-se1f, app-se2f {
   }
   .se2f-txt-directions {
     font-size: 1rem !important;
+  }
+  .result-txt-directions { width: 100% !important; }
+  .full-w .option {
+    display: block !important;
+    width: 100% !important;
+    margin: 1rem 0 0 0 !important;
+  }
+  .result-controls .btn {
+    margin-right: 1rem !important;
+    padding: 0.6rem 1.5rem !important;
   }
 }
 

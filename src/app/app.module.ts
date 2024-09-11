@@ -12,6 +12,7 @@ import { MainComponent } from './main/main.component';
 import { DisclaimerComponent } from './main/disclaimer/disclaimer.component';
 import { Se1fComponent } from './main/se1f/se1f.component';
 import { Se2fComponent } from './main/se2f/se2f.component';
+import { ResultComponent } from './main/result/result.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { Se2fComponent } from './main/se2f/se2f.component';
     MainComponent,
     DisclaimerComponent,
     Se1fComponent,
-    Se2fComponent
+    Se2fComponent,
+    ResultComponent
   ],
   imports: [
     BrowserModule,

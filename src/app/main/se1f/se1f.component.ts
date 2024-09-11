@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 
 import { ChainingDataService } from '../../services/chaining-data.service';
 import { FrameService } from '../../services/frame.service';
+import { SoundService } from '../../services/sound.service';
 import { Fact } from '../../models/fact.model';
 import { Se2fComponent } from '../se2f/se2f.component';
 
@@ -19,7 +20,7 @@ export class Se1fComponent implements OnInit, OnDestroy {
   private knowledge!: Fact;
 
   constructor(private chainingDataService: ChainingDataService, private messageService: MessageService,
-              private frameService: FrameService) {}
+              private frameService: FrameService, private soundService: SoundService) {}
 
   ngOnInit() {
     this.knowledgeSubs = this.chainingDataService.knowledge.subscribe(data => this.displayKnowledge(data));
@@ -27,7 +28,10 @@ export class Se1fComponent implements OnInit, OnDestroy {
 
   private displayKnowledge(data: Fact) {
     this.knowledge = data;
-    this.messageService.add({ severity: 'info', summary: '1er Encadenamiento', detail: this.knowledge.afeccion });
+    if (data.afeccion !== '') {
+      this.soundService.notificationSound();
+      this.messageService.add({ severity: 'info', summary: '1er Encadenamiento', detail: this.knowledge.afeccion });
+    }
   }
 
   validateChoices(element: any, form: NgForm) {
@@ -40,6 +44,12 @@ export class Se1fComponent implements OnInit, OnDestroy {
 
   changeFrame() {
     this.frameService.frame.next(Se2fComponent);
+  }
+
+  returnToDisclaimer() {
+    this.frameService.disclaimer.next(false);
+    this.frameService.frame.next(undefined);
+    this.chainingDataService.reset();
   }
 
   ngOnDestroy() {

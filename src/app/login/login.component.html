@@ -1,7 +1,8 @@
+<input type="hidden" id="auth" style="width: 50%; overflow-x: scroll" (input)="toMain($event.target)"/>
 <div class="login-bg grid full login-grid center">
   <span class="login-title">DiagnoCom</span>
   <span class="login-logo full"></span>
   <span class="login-txt-1">Sistema Experto Diagnosticador de Enfermedades Comunes</span>
   <span class="login-txt-2">Presione acceder para comenzar</span>
-  <input type="button" value="Acceder" class="login-acceder btn" (click)="accederClicked()">
+  <input type="button" id="login" value="Acceder" class="login-acceder btn" (click)="accederClicked()">
 </div>
