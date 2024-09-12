@@ -1,0 +1,12 @@
+<div class="login-browser-form flex">
+  <form class="full-w flex" style="justify-content: center" [formGroup]="form" (ngSubmit)="browserAuth()">
+    <label for="user" class="full-w block">
+      <input type="text" class="input full-w" formControlName="user" id="user" placeholder="Usuario" />
+    </label>
+    <label for="pass" class="full-w block">
+      <input type="password" class="input full-w" formControlName="pass" id="pass" placeholder="Contraseña" />
+    </label>
+    <input type="submit" class="btn" value="{{ isLogin ? 'Acceder' : 'Registrar' }}" />
+  </form>
+  <p-toast [life]="5000" [breakpoints]="{'1000px': {width: '95%', right: '2.5%'}}" />
+</div>

@@ -9,7 +9,6 @@ export class SoundService {
   constructor() {
     this.notification = new Howl({
       src: ['../../assets/sounds/land3.mp3'],
-      volume: 1.0,
       html5: true
     });
   }

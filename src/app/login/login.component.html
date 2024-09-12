@@ -3,6 +3,11 @@
   <span class="login-title">DiagnoCom</span>
   <span class="login-logo full"></span>
   <span class="login-txt-1">Sistema Experto Diagnosticador de Enfermedades Comunes</span>
-  <span class="login-txt-2">Presione acceder para comenzar</span>
-  <input type="button" id="login" value="Acceder" class="login-acceder btn" (click)="accederClicked()">
+  <div class="flex full login-acceder" [ngClass]="{'hidden': isBrowserAuth}">
+    <span class="login-txt-2 full-w center-txt">Presione acceder para comenzar</span>
+    <input type="button" id="login" value="{{ !isBrowserAuth ? 'Iniciar sesi&oacute;n' : 'Acceder' }}" class="btn" (click)="accederClicked()" />
+    <input type="button" value="Registrar" class="btn" (click)="registrar()">
+  </div>
+  <ng-container *ngComponentOutlet="browserForm; inputs: {'isLogin': isLogin}"></ng-container>
 </div>
+<p-toast [life]="5000" [breakpoints]="{'1000px': {width: '95%', right: '2.5%'}}" />

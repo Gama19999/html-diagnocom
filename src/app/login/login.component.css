@@ -3,13 +3,27 @@
 }
 
 .login-grid {
-  grid-template-rows: 20% 30% 15% 12% 1fr;
+  grid-template-rows: 20% 30% 15% 25% 1fr;
 }
 
 .login-grid > * { grid-column: 2; }
 
 .login-logo {
   background: url("../../assets/images/diagnocom.webp") 50% 50% / 10% 60% no-repeat;
+}
+
+.login-acceder {
+  justify-content: space-evenly;
+  align-content: space-around;
+}
+
+.login-browser-form {
+  width: 30%;
+  justify-content: center;
+}
+
+.hidden {
+  display: none;
 }
 
 /**** TEXTS ****/

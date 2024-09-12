@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideHttpClient } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast';
 
 import { AppRoutingModule } from './app-routing.module'
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
+import { FormComponent } from './login/form/form.component';
 import { MainComponent } from './main/main.component';
 import { DisclaimerComponent } from './main/disclaimer/disclaimer.component';
 import { Se1fComponent } from './main/se1f/se1f.component';
@@ -18,6 +19,7 @@ import { ResultComponent } from './main/result/result.component';
   declarations: [
     AppComponent,
     LoginComponent,
+    FormComponent,
     MainComponent,
     DisclaimerComponent,
     Se1fComponent,
@@ -28,6 +30,7 @@ import { ResultComponent } from './main/result/result.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule,
     BrowserAnimationsModule,
     ToastModule
   ],

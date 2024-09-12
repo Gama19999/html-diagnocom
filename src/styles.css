@@ -29,6 +29,10 @@ app-se1f, app-se2f, app-result {
   height: 100%;
   width: 100%;
 }
+app-form {
+  grid-column: 2;
+  grid-row: 4;
+}
 
 
 /**** DISPLAYS ****/
@@ -40,6 +44,7 @@ app-se1f, app-se2f, app-result {
   display: flex;
   flex-flow: row wrap;
 }
+.block { display: block; }
 
 
 /**** POSITIONING ****/
@@ -83,6 +88,18 @@ app-se1f, app-se2f, app-result {
   background-color: aliceblue;
   cursor: pointer;
 }
+.input {
+  margin-bottom: 1rem;
+  border: 0;
+  border-radius: 15px;
+  padding: 0.6rem 2rem;
+  box-shadow: 3px 4px 5px 0 rgba(0,0,0,0.4), inset 0 0 5px 100px rgba(0,0,0,0.0);
+  transition: all 0.3s;
+}
+.input:focus {
+  outline: 0;
+  box-shadow: 3px 4px 5px 0 rgba(0,0,0,0.4), inset 0 0 5px 100px rgba(0,0,0,0.1);
+}
 .selected {
   box-shadow: 1px 1px 5px 0 rgba(0,0,0,0.5), inset 0 0 5px 100px rgba(0,0,0,0.1);
 }
@@ -94,6 +111,9 @@ app-se1f, app-se2f, app-result {
 }
 .p-toast-message {
   margin-bottom: 1rem;
+}
+input.ng-invalid {
+  box-shadow: 3px 4px 5px 0 rgba(0,0,0,0.4), inset 0 0 1px 100px rgba(255,0,0,0.3);
 }
 
 
