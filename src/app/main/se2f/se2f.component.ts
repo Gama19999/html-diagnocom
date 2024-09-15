@@ -43,7 +43,7 @@ export class Se2fComponent implements OnInit, OnDestroy {
   private checkChainingError(error: MessageResponse) {
     if (error.status === 404) {
       this.soundService.notificationSound();
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: error.data });
+      this.messageService.add({ severity: 'warn', summary: 'Atención', detail: error.data });
     }
   }
 

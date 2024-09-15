@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast';
+import { CookieService } from 'ngx-cookie-service';
 
 import { AppRoutingModule } from './app-routing.module'
+import { authInterceptor } from './rules/auth.interceptor';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { FormComponent } from './login/form/form.component';
@@ -35,7 +37,8 @@ import { ResultComponent } from './main/result/result.component';
     ToastModule
   ],
   providers: [
-    provideHttpClient()
+    provideHttpClient(withInterceptors([authInterceptor])),
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

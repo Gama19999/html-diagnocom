@@ -19,7 +19,7 @@ export class ChainingDataService {
   constructor(private http: HttpClient) {}
 
   doForwardChain(data: any) {
-    this.http.post<MessageResponse>(environment.api + 'forward', {'choices': data}).subscribe({
+    this.http.post<MessageResponse>(environment.api + 'brb/forward', {'object': data}).subscribe({
       next: response => this.handleResponse(response),
       error: failure => { console.log(failure); this.lastError.next(failure.error); }
     });

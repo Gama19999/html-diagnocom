@@ -38,7 +38,7 @@ export class ResultComponent implements OnInit, OnDestroy {
 
   printResult() {
     this.soundService.notificationSound();
-    this.messageService.add({ severity: 'success', summary: 'Imprimiendo', detail: 'Feature not activated!' });
+    this.messageService.add({ severity: 'secondary', summary: 'Imprimiendo', detail: 'Feature not activated!' });
   }
 
   ngOnDestroy(): void {

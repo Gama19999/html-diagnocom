@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { browserGuard } from './guards/browser.guard';
+import { browserGuard } from './rules/browser.guard';
 import { LoginComponent } from './login/login.component';
 import { MainComponent } from './main/main.component';
 import { DisclaimerComponent } from './main/disclaimer/disclaimer.component';

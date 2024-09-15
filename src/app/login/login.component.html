@@ -5,9 +5,8 @@
   <span class="login-txt-1">Sistema Experto Diagnosticador de Enfermedades Comunes</span>
   <div class="flex full login-acceder" [ngClass]="{'hidden': isBrowserAuth}">
     <span class="login-txt-2 full-w center-txt">Presione acceder para comenzar</span>
-    <input type="button" id="login" value="{{ !isBrowserAuth ? 'Iniciar sesi&oacute;n' : 'Acceder' }}" class="btn" (click)="accederClicked()" />
-    <input type="button" value="Registrar" class="btn" (click)="registrar()">
+    <input type="button" id="login" value="Acceder" class="btn" (click)="accederClicked()" />
   </div>
-  <ng-container *ngComponentOutlet="browserForm; inputs: {'isLogin': isLogin}"></ng-container>
+  <ng-container *ngComponentOutlet="browserForm; inputs: {'firstAuthMobile': firstAuthMobile}"></ng-container>
 </div>
-<p-toast [life]="5000" [breakpoints]="{'1000px': {width: '95%', right: '2.5%'}}" />
+<p-toast [life]="1500" [breakpoints]="{'1000px': {width: '95%', right: '2.5%'}}" (onClose)="authSuccess()" />
