@@ -1,56 +1,89 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 
 import { environment } from '../../environments/environment';
+import { FrameService } from './frame.service';
+import { ChainingDataService } from './chaining-data.service';
 import { MessageResponse } from '../models/message-response.model';
-import { LoginStatus } from '../models/login-status.model';
+import { AuthStatus } from '../models/auth-status.model';
 
 @Injectable({ providedIn: 'root'})
 export class AuthService {
-  private loginStatus: LoginStatus = new LoginStatus(false, '');
-  public logged: BehaviorSubject<LoginStatus> = new BehaviorSubject(this.loginStatus);
+  private sessionTimeoutId: any;
+  private sessionListener = () => { this.sessionTimeout(); };
+  private authStatus: AuthStatus = new AuthStatus();
+  appAuth: BehaviorSubject<AuthStatus> = new BehaviorSubject(this.authStatus);
 
-  constructor(private http: HttpClient, private cookieService: CookieService) {}
+  constructor(private http: HttpClient, private cookieService: CookieService, private frameService: FrameService,
+              private router: Router, private chainingDataService: ChainingDataService) {}
 
-  get isLogged() { return this.cookieService.get('token') && this.loginStatus.logged; }
+  get isLogged() { return this.cookieService.get('token') && this.authStatus.authenticated; }
 
   browserAuth(data: any) {
-    this.checkBiometricsChoice(data);
+    this.enableBiometrics(data);
     this.http.post<MessageResponse>(environment.api + 'auth/' + data.action, {'object': data}).subscribe({
-      next: response => this.handleAuthResponse(response),
+      next: success => this.handleSuccess(success),
       error: failure => this.handleFailureResponse(failure)
     });
   }
 
-  private checkBiometricsChoice(data: any) {
-    if (data.biometric) this.cookieService.set('biometric', JSON.stringify(data), 30);
+  private enableBiometrics(data: any) {
+    if (data.biometrics) this.cookieService.set('biometrics', JSON.stringify(data), 30);
   }
 
-  private handleAuthResponse(response: MessageResponse) {
-    this.loginStatus.logged = true;
-    this.cookieService.set('token', response.data.token, 1);
-    this.logged.next(this.loginStatus);
+  private handleSuccess(success: MessageResponse) {
+    this.authStatus.authenticated = true;
+    this.cookieService.set('token', success.data.token, 1);
+    this.authStatus.wasRegistration = success.status == 201;
+    this.addSessionListener();
+    this.appAuth.next(this.authStatus);
+  }
+
+  private addSessionListener() {
+    document.addEventListener("visibilitychange", this.sessionListener);
+    console.log('Added session listener!');
   }
 
   private handleFailureResponse(error: any) {
-    this.cookieService.delete('biometric');
     console.log(error);
-    this.loginStatus.message = error.error.data;
-    this.logged.next(this.loginStatus);
+    this.cookieService.delete('biometrics');
+    this.authStatus.errorMessage = error.error.data;
+    this.appAuth.next(this.authStatus);
   }
 
   mobileAuth() {
-    let biometricData = JSON.parse(this.cookieService.get('biometric'));
-    biometricData.biometric = false;
-    biometricData.action = 'login';
-    this.browserAuth(biometricData);
+    let biometricsData = JSON.parse(this.cookieService.get('biometrics'));
+    biometricsData.biometrics = false;
+    biometricsData.action = 'login';
+    this.browserAuth(biometricsData);
   }
 
   logout() {
     this.cookieService.delete('token');
-    this.loginStatus.logged = false;
-    this.loginStatus.message = '';
+    this.chainingDataService.reset();
+    this.frameService.reset();
+    this.authStatus.reset();
+    this.detachSessionListener();
+    this.router.navigate(['/']);
+    console.log('Logout success!');
+  }
+
+  private detachSessionListener() {
+    document.removeEventListener("visibilitychange", this.sessionListener);
+    console.log('Detached session listener!');
+  }
+
+  private sessionTimeout() {
+    if (this.sessionTimeoutId) {
+      console.log('Session destroy timeout cancelled!');
+      clearTimeout(this.sessionTimeoutId);
+    }
+    if (document.hidden) {
+      console.log('Session destroy timeout started!');
+      this.sessionTimeoutId = setTimeout(() => { this.logout(); }, 5000);
+    }
   }
 }

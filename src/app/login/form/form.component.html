@@ -6,12 +6,8 @@
     <label for="pass" class="full-w block">
       <input type="password" class="input full-w" formControlName="password" id="pass" placeholder="Contraseña" />
     </label>
-    <label for="biometric" class="full-w flex label-biometric" *ngIf="isMobile && firstAuthMobile">
-      Habilitar biométricos:
-      <input type="button" class="btn btn-biometric" id="biometric"
-             formControlName="biometric"
-             [ngClass]="{'bio-true': form.controls['biometric'].value, 'bio-false': !form.controls['biometric'].value}"
-             (click)="toggleBiometric()"/>
+    <label for="biometrics" class="full-w flex label-biometrics" *ngIf="isMobile">
+      Habilitar biométricos:<p-inputSwitch id="biometrics" formControlName="biometrics"></p-inputSwitch>
     </label>
     <input type="hidden" formControlName="action" />
     <input type="submit" class="btn right-gap" value="Acceder" (click)="setAction('login')" />

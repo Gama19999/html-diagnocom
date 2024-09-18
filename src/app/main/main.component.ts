@@ -25,7 +25,5 @@ export class MainComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     if (this.frameSubs) this.frameSubs.unsubscribe();
     if (this.disclaimerSubs) this.disclaimerSubs.unsubscribe();
-    this.frameService.disclaimer.next(false);
-    this.frameService.frame.next(undefined);
   }
 }

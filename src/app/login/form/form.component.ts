@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 
@@ -13,7 +13,6 @@ import { AuthService } from '../../services/auth.service';
   providers: [MessageService]
 })
 export class FormComponent implements OnInit {
-  @Input('firstAuthMobile') firstAuthMobile!: boolean;
   isMobile: boolean = environment.mobile;
   form!: FormGroup;
 
@@ -25,7 +24,7 @@ export class FormComponent implements OnInit {
       password: new FormControl(null, Validators.required),
       action: new FormControl('login', Validators.required)
     });
-    if (this.firstAuthMobile) this.form.addControl('biometric', new FormControl(false, Validators.required));
+    if (this.isMobile) this.form.addControl('biometrics', new FormControl(false, Validators.required));
   }
 
   browserAuth() {
@@ -43,6 +42,4 @@ export class FormComponent implements OnInit {
   }
 
   setAction = (action: string) => this.form.controls['action'].setValue(action);
-
-  toggleBiometric = () => this.form.controls['biometric'].setValue(!this.form.controls['biometric'].value);
 }

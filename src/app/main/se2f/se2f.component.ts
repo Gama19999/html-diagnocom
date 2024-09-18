@@ -37,7 +37,10 @@ export class Se2fComponent implements OnInit, OnDestroy {
 
   private handleKnowledge(data: Fact) {
     this.knowledge = data;
-    if (data.enfermedad) this.frameService.frame.next(ResultComponent);
+    if (data.enfermedad) {
+        this.soundService.notificationSound();
+        this.messageService.add({ severity: 'info', summary: '2do Encadenamiento', detail: this.knowledge.enfermedad });
+    }
   }
 
   private checkChainingError(error: MessageResponse) {
@@ -52,6 +55,10 @@ export class Se2fComponent implements OnInit, OnDestroy {
     form.form.controls[clicked].setValue(value === 'si' ? 'no' : 'si');
     if (value === 'si') document.getElementById(clicked)!.classList.remove('selected');
     else document.getElementById(clicked)!.classList.add('selected');
+  }
+
+  changeFrame() {
+    if (this.knowledge.enfermedad) this.frameService.frame.next(ResultComponent);
   }
 
   callForwardChaining(form: NgForm) {

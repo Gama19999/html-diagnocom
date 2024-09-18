@@ -28,7 +28,7 @@ export class Se1fComponent implements OnInit, OnDestroy {
 
   private displayKnowledge(data: Fact) {
     this.knowledge = data;
-    if (data.afeccion !== '') {
+    if (data.afeccion) {
       this.soundService.notificationSound();
       this.messageService.add({ severity: 'info', summary: '1er Encadenamiento', detail: this.knowledge.afeccion });
     }
@@ -42,9 +42,7 @@ export class Se1fComponent implements OnInit, OnDestroy {
     this.chainingDataService.doForwardChain(form.form.value);
   }
 
-  changeFrame() {
-    this.frameService.frame.next(Se2fComponent);
-  }
+  changeFrame = () => this.frameService.frame.next(Se2fComponent);
 
   returnToDisclaimer() {
     this.frameService.disclaimer.next(false);

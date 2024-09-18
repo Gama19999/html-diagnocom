@@ -5,11 +5,9 @@ import { Subscription } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 
 import { environment } from '../../environments/environment';
-import { FrameService } from '../services/frame.service';
 import { SoundService } from '../services/sound.service';
 import { AuthService } from '../services/auth.service';
-import { FormComponent } from './form/form.component';
-import { LoginStatus } from '../models/login-status.model';
+import { AuthStatus } from '../models/auth-status.model';
 
 @Component({
   selector: 'app-login',
@@ -18,58 +16,70 @@ import { LoginStatus } from '../models/login-status.model';
   providers: [MessageService]
 })
 export class LoginComponent implements OnInit, OnDestroy {
-  private isLoggedSubs!: Subscription;
+  private appAuthSubs!: Subscription;
   isBrowserAuth: boolean = false;
   firstAuthMobile!: boolean;
-  browserForm: any;
 
-  constructor(private router: Router, private route: ActivatedRoute, private frameService: FrameService,
-              private messageService: MessageService, private soundService: SoundService,
-              private authService: AuthService, private cookieService: CookieService) {}
+  constructor(private messageService: MessageService, private soundService: SoundService, private router: Router,
+              private authService: AuthService, private cookieService: CookieService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.frameService.disclaimer.next(false);
-    this.firstAuthMobile = !this.cookieService.get('biometric');
-    this.isLoggedSubs = this.authService.logged.subscribe(status => this.checkBrowserAuth(status));
+    this.authService.logout();
+    this.firstAuthMobile = !this.cookieService.get('biometrics');
+    this.appAuthSubs = this.authService.appAuth.subscribe(data => this.checkAppAuth(data));
   }
 
-  private checkBrowserAuth(status: LoginStatus) {
-    if (status.logged) {
+  private checkAppAuth(appAuth: AuthStatus) {
+    if (appAuth.authenticated) {
+      let title = appAuth.wasRegistration ? 'Registro' : 'Autenticación';
       this.soundService.notificationSound();
-      this.messageService.add({ severity: 'success', summary: 'Autenticación', detail: 'con éxito!' });
-    } else if (status.message != '') {
+      this.messageService.add({ severity: 'success', summary: title, detail: 'con éxito!' });
+    } else if (appAuth.errorMessage) {
       this.soundService.notificationSound();
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: status.message });
+      this.messageService.add({ severity: 'error', summary: 'Error', detail: appAuth.errorMessage });
     }
   }
 
-  toMain(input: any) {
-    if ((<HTMLInputElement> input).value === 'biometric_success') {
-      this.authService.mobileAuth();
-      this.soundService.notificationSound();
-      this.messageService.add({ severity: 'success', summary: 'Autenticación exitosa' });
+  authPrompt() {
+    if (environment.mobile && !this.firstAuthMobile) {
+      // @ts-ignore: cordova bioAuth method
+      app.bioAuth();
+    } else this.browserAuth();
+  }
+
+  private browserAuth() {
+    this.soundService.notificationSound();
+    this.messageService.add({ severity: 'info', summary: 'Autenticación', detail: 'por contraseña' });
+    document.getElementById('login-acceder-btn')!.classList.add('hidden');
+    this.isBrowserAuth = true;
+    document.getElementById('login-form')!.classList.remove('hidden');
+  }
+
+  mobileAuth(input: any) {
+    let result = (<HTMLInputElement> input).value;
+    switch (result) {
+      case 'biometric_success':
+        this.authService.mobileAuth();
+        break;
+      case 'BIOMETRIC_DISMISSED':
+        // @ts-ignore: cordova bioAuth method
+        app.bioAuth();
+        break;
+      default:
+        this.cookieService.delete('biometrics');
+        this.browserAuth();
     }
+  }
+
+  isAuthSuccess() {
+    if (this.authService.isLogged) this.nextFrame();
   }
 
   private nextFrame() {
     this.router.navigate(['/', 'main'], { relativeTo: this.route });
   }
 
-  accederClicked() {
-    if (environment.mobile && !this.firstAuthMobile) {
-      // @ts-ignore: cordova object
-      app.authenticate();
-    } else {
-      this.isBrowserAuth = true;
-      this.browserForm = FormComponent;
-    }
-  }
-
-  authSuccess() {
-    if (this.authService.isLogged) this.nextFrame();
-  }
-
   ngOnDestroy() {
-    if (this.isLoggedSubs) this.isLoggedSubs.unsubscribe();
+    if (this.appAuthSubs) this.appAuthSubs.unsubscribe();
   }
 }

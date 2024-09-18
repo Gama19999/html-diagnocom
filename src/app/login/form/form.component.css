@@ -2,22 +2,12 @@
   margin-right: 1rem;
 }
 
-.label-biometric {
+.label-biometrics {
   margin: 1rem 0 2rem 0;
   justify-content: center;
   align-items: center;
 }
 
-.btn-biometric {
-  margin-left: 0.5rem;
-  color: transparent;
-  padding: 0.2rem 0.7rem;
-}
-
-.bio-true {
-  background-color: lawngreen;
-}
-
-.bio-false {
-  background-color: crimson;
+p-inputswitch {
+  margin-left: 1rem;
 }

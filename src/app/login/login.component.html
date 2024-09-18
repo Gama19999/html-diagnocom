@@ -1,12 +1,12 @@
-<input type="hidden" id="auth" style="width: 50%; overflow-x: scroll" (input)="toMain($event.target)"/>
+<input type="hidden" id="bio-auth" style="width: 50%; overflow-x: scroll" (input)="mobileAuth($event.target)"/>
 <div class="login-bg grid full login-grid center">
   <span class="login-title">DiagnoCom</span>
   <span class="login-logo full"></span>
   <span class="login-txt-1">Sistema Experto Diagnosticador de Enfermedades Comunes</span>
-  <div class="flex full login-acceder" [ngClass]="{'hidden': isBrowserAuth}">
+  <div class="flex full login-acceder" id="login-acceder-btn">
     <span class="login-txt-2 full-w center-txt">Presione acceder para comenzar</span>
-    <input type="button" id="login" value="Acceder" class="btn" (click)="accederClicked()" />
+    <input type="button" id="login" value="Acceder" class="btn" (click)="authPrompt()" />
   </div>
-  <ng-container *ngComponentOutlet="browserForm; inputs: {'firstAuthMobile': firstAuthMobile}"></ng-container>
+  <app-form class="hidden" id="login-form"></app-form>
 </div>
-<p-toast [life]="1500" [breakpoints]="{'1000px': {width: '95%', right: '2.5%'}}" (onClose)="authSuccess()" />
+<p-toast [life]="1500" [breakpoints]="{'1000px': {width: '95%', right: '2.5%'}}" (onClose)="isAuthSuccess()" />

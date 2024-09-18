@@ -3,8 +3,13 @@ import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class FrameService {
-  public frame: BehaviorSubject<any> = new BehaviorSubject(undefined);
-  public disclaimer: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  frame: BehaviorSubject<any> = new BehaviorSubject(undefined);
+  disclaimer: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor() {}
+
+  reset() {
+    this.frame.next(undefined);
+    this.disclaimer.next(false);
+  }
 }

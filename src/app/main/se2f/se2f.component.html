@@ -15,5 +15,5 @@
     <input type="button" class="btn" value="Regresar" (click)="returnTo1stFrame()" />
     <input type="button" class="btn" value="Ver resultado" (click)="callForwardChaining(se2f)" />
   </div>
-  <p-toast [life]="5000" [breakpoints]="{'1000px': {width: '95%', right: '2.5%'}}" />
+  <p-toast [life]="5000" [breakpoints]="{'1000px': {width: '95%', right: '2.5%'}}" (onClose)="changeFrame()" />
 </section>
