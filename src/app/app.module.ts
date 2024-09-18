@@ -4,6 +4,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ToastModule } from 'primeng/toast';
+import { InputSwitchModule } from 'primeng/inputswitch';
 import { CookieService } from 'ngx-cookie-service';
 
 import { AppRoutingModule } from './app-routing.module'
@@ -34,7 +35,8 @@ import { ResultComponent } from './main/result/result.component';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    ToastModule
+    ToastModule,
+    InputSwitchModule
   ],
   providers: [
     provideHttpClient(withInterceptors([authInterceptor])),
