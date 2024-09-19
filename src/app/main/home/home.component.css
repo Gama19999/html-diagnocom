@@ -1,0 +1,29 @@
+.home-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 15% 78% 7%;
+    justify-items: left;
+}
+
+.home-user {
+    font-size: 1.5rem;
+}
+
+.home-options {
+    align-content: space-around;
+}
+
+.home-btn {
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+}
+
+.pi {
+    font-size: 2.5rem;
+    margin-right: 0.5rem;
+}
+
+.pi-history {
+    margin-left: 1rem;
+}

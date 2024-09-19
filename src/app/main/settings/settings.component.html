@@ -1,0 +1,19 @@
+<section class="full center settings-grid">
+    <div class="settings-txt-title">Ajustes de usuario</div>
+    <form class="settings-form flex full" [formGroup]="form" (ngSubmit)="updateUser()">
+        <label for="username" class="full-w block">Nombre de usuario:</label>
+        <input type="text" formControlName="username" id="username" class="input full-w" placeholder="Escribe un usuario" />
+        <label for="email" class="full-w block">Correo electr&oacute;nico:</label>
+        <input type="email" formControlName="email" id="email" class="input full-w" placeholder="Email válido" />
+        <label for="currentPassword" class="full-w block">Contraseña actual:</label>
+        <input type="password" formControlName="currentPassword" id="currentPassword" class="input full-w"
+               placeholder="Obligatoria para guardar cambios" />
+        <label for="newPassword" class="full-w block">Cambio de contraseña:</label>
+        <input type="password" formControlName="newPassword" id="newPassword" class="input full-w"
+               placeholder="Mínimo 8 caracteres" />
+        <input type="button" value="Guardar cambios" class="btn settings-save" (click)="updateUser()" />
+        <input type="button" value="Regresar" class="btn" (click)="returnToHome()" />
+    </form>
+    <p-confirmDialog />
+    <p-toast [breakpoints]="{'1000px': {width: '95%', right: '2.5%'}}" />
+</section>

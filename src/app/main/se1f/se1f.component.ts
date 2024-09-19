@@ -7,6 +7,7 @@ import { ChainingDataService } from '../../services/chaining-data.service';
 import { FrameService } from '../../services/frame.service';
 import { SoundService } from '../../services/sound.service';
 import { Fact } from '../../models/fact.model';
+import { HomeComponent } from '../home/home.component';
 import { Se2fComponent } from '../se2f/se2f.component';
 
 @Component({
@@ -44,9 +45,8 @@ export class Se1fComponent implements OnInit, OnDestroy {
 
   changeFrame = () => this.frameService.frame.next(Se2fComponent);
 
-  returnToDisclaimer() {
-    this.frameService.disclaimer.next(false);
-    this.frameService.frame.next(undefined);
+  returnToHome() {
+    this.frameService.frame.next(HomeComponent);
     this.chainingDataService.reset();
   }
 

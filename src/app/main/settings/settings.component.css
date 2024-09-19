@@ -1,0 +1,19 @@
+.settings-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 15% 78% 7%;
+    justify-items: left;
+}
+
+.settings-txt-title {
+    font-size: 2rem;
+}
+
+.settings-form {
+    width: 50%;
+    align-content: space-evenly;
+}
+
+.settings-save {
+    margin-right: 1rem;
+}

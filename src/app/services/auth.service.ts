@@ -38,7 +38,7 @@ export class AuthService {
     this.authStatus.authenticated = true;
     this.cookieService.set('token', success.data.token, 1);
     this.authStatus.wasRegistration = success.status == 201;
-    this.addSessionListener();
+    if (environment.production) this.addSessionListener();
     this.appAuth.next(this.authStatus);
   }
 
@@ -66,7 +66,7 @@ export class AuthService {
     this.chainingDataService.reset();
     this.frameService.reset();
     this.authStatus.reset();
-    this.detachSessionListener();
+    if (environment.production) this.detachSessionListener();
     this.router.navigate(['/']);
     console.log('Logout success!');
   }

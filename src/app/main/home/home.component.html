@@ -1,0 +1,18 @@
+<section class="full center home-grid">
+    <div class="home-user">
+        <i class="pi pi-user"></i>{{ username }}
+        <i class="pi pi-history"></i>{{ lastActivity | date:'short' }}
+    </div>
+    <div class="full flex home-options">
+        <span class="home-btn option flex" (click)="startDiagnoCom()">
+            <i class="pi pi-chevron-circle-right"></i>Iniciar sistema experto
+        </span>
+        <span class="home-btn option flex">
+            <i class="pi pi-book"></i>Reglas de producción
+        </span>
+        <span class="home-btn option flex" (click)="goToSettings()">
+            <i class="pi pi-cog"></i>Ajustes de usuario
+        </span>
+    </div>
+    <input type="button" value="Salir" class="btn" (click)="exit()"/>
+</section>

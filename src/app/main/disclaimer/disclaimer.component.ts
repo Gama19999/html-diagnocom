@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 
 import { FrameService } from '../../services/frame.service';
 import { AuthService } from '../../services/auth.service';
-import { Se1fComponent } from '../se1f/se1f.component';
+import { HomeComponent } from '../home/home.component';
 
 @Component({
   selector: 'app-disclaimer',
@@ -15,7 +15,7 @@ export class DisclaimerComponent {
 
   aceptoClicked() {
     this.frameService.disclaimer.next(true);
-    this.frameService.frame.next(Se1fComponent);
+    this.frameService.frame.next(HomeComponent);
   }
 
   salirClicked() {
