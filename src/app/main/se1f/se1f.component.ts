@@ -8,7 +8,7 @@ import { FrameService } from '../../services/frame.service';
 import { SoundService } from '../../services/sound.service';
 import { Fact } from '../../models/fact.model';
 import { HomeComponent } from '../home/home.component';
-import { Se2fComponent } from '../se2f/se2f.component';
+import { SeTemperatureComponent } from '../se-temp/se-temperature.component';
 
 @Component({
   selector: 'app-se1f',
@@ -43,7 +43,7 @@ export class Se1fComponent implements OnInit, OnDestroy {
     this.chainingDataService.doForwardChain(form.form.value);
   }
 
-  changeFrame = () => this.frameService.frame.next(Se2fComponent);
+  changeFrame = () => this.frameService.frame.next(SeTemperatureComponent);
 
   returnToHome() {
     this.frameService.frame.next(HomeComponent);

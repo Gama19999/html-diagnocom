@@ -9,7 +9,7 @@ import { SoundService } from '../../services/sound.service';
 import { Options } from '../../models/options.model';
 import { Fact } from '../../models/fact.model';
 import { MessageResponse } from '../../models/message-response.model';
-import { Se1fComponent } from '../se1f/se1f.component';
+import { SeTemperatureComponent } from '../se-temp/se-temperature.component';
 import { ResultComponent } from '../result/result.component';
 
 @Component({
@@ -65,9 +65,9 @@ export class Se2fComponent implements OnInit, OnDestroy {
     this.chainingDataService.doForwardChain(form.form.value);
   }
 
-  returnTo1stFrame() {
-    this.chainingDataService.reset();
-    this.frameService.frame.next(Se1fComponent);
+  returnToTemperature() {
+    this.chainingDataService.reset(this.knowledge.afeccion);
+    this.frameService.frame.next(SeTemperatureComponent);
   }
 
   ngOnDestroy() {

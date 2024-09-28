@@ -44,7 +44,7 @@ app-disclaimer {
   grid-row: 2 / 4;
   grid-template-rows: 1fr 15%
 }
-app-home, app-se1f, app-se2f, app-result, app-settings {
+app-home, app-se1f, app-se-temp, app-se2f, app-result, app-settings {
   grid-column: 2;
   grid-row: 2 / 4;
   height: 100%;

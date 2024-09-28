@@ -1,0 +1,12 @@
+<section class="full center se-temperature-grid">
+    <span class="se-temperature-txt-title">Temperatura corporal</span>
+    <span class="se-temperature-txt-directions">Deslice para capturar su temperatura corporal actual.</span>
+    <div class="se-temperature-slider full flex">
+        <p-knob [(ngModel)]="temperature" [min]="36.0" [max]="41.0" [step]="0.1" [size]="200" valueTemplate="{value}°C"
+                rangeColor="rgba(0,0,0,0.2)" textColor="black" />
+    </div>
+    <div class="se-temperature-controls full flex">
+        <input type="button" class="btn" value="Regresar" (click)="returnTo1stFrame()" />
+        <input type="button" class="btn" value="Siguiente" (click)="goto2ndFrame()" />
+    </div>
+</section>

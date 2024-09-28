@@ -35,10 +35,20 @@ export class ChainingDataService {
     this.knowledge.next(this._knowledge);
   }
 
+  submitTemperature(temperature: number = 37.0) {
+    for (let key in this._options) {
+      if (this._options[key]['name'] === 'temperatura') {
+        this._options[key]['value'] = temperature.toString();
+        this.options.next(JSON.parse(JSON.stringify(this._options)));
+        return;
+      }
+    }
+  }
+
   reset(afeccion: string = '') {
     this._knowledge.afeccion = afeccion;
     this._knowledge.enfermedad = '';
     this.knowledge.next(this._knowledge);
-    this.options.next(JSON.parse(JSON.stringify(this._options)));
+    this.submitTemperature();
   }
 }
