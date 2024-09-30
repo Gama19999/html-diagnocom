@@ -1,14 +1,26 @@
-.disclaimer-txt-1 {
+.disclaimer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 8% 5% 80% 7%;
+}
+
+.disclaimer-txt-title {
+  font-size: 1.9rem;
+  grid-row: 1 / 3;
+}
+
+.disclaimer-txt-directions {
+  font-size: 1.2rem;
+}
+
+.disclaimer-txt-content {
   width: 50%;
   text-align: justify;
   font-size: 1.5rem;
   line-height: 2.6rem;
-  grid-column: 2;
 }
 
 .disclaimer-control {
-  grid-column: 2;
-  grid-row: 2;
   width: 50%;
   justify-content: space-evenly;
 }

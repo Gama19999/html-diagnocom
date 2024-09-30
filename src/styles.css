@@ -41,8 +41,9 @@ html, body { height: 100%; }
 
 /**** COMPONENTS ****/
 app-disclaimer {
+  grid-column: 2;
   grid-row: 2 / 4;
-  grid-template-rows: 1fr 15%
+  height: 100%;
 }
 app-home, app-se1f, app-se-temp, app-se2f, app-result, app-settings {
   grid-column: 2;
@@ -147,7 +148,7 @@ input.ng-touched.ng-invalid {
 
 /**** MEDIA QUERIES ****/
 @media (max-width: 1000px) {
-  .scroll { overflow-y: scroll; }
+  .scroll, app-disclaimer { overflow-y: scroll; }
   .login-title { font-size: 4rem !important; }
   .login-logo {
     background: url("./assets/images/diagnocom.webp") 50% 50% / 40% 60% no-repeat !important;
@@ -156,7 +157,7 @@ input.ng-touched.ng-invalid {
     font-size: 1.5rem !important;
     width: 100% !important;
   }
-  .disclaimer-txt-1 {
+  .disclaimer-txt-content {
     width: 90% !important;
     font-size: 1rem !important;
     line-height: 2.2rem !important;

@@ -1,29 +1,15 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-
-import { FrameService } from '../services/frame.service';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
-export class MainComponent implements OnInit, OnDestroy {
-  accepted: boolean = false;
-  frame: any;
+export class MainComponent {
 
-  private disclaimerSubs!: Subscription;
-  private frameSubs!: Subscription;
-
-  constructor(private frameService: FrameService) {}
-
-  ngOnInit() {
-    this.disclaimerSubs = this.frameService.disclaimer.subscribe(value => this.accepted = value);
-    this.frameSubs = this.frameService.frame.subscribe(component => this.frame = component);
+  constructor(private router: Router) {
+    this.router.navigate(['/', 'main', 'disclaimer']);
   }
 
-  ngOnDestroy() {
-    if (this.frameSubs) this.frameSubs.unsubscribe();
-    if (this.disclaimerSubs) this.disclaimerSubs.unsubscribe();
-  }
 }

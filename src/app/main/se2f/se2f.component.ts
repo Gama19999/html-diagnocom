@@ -9,8 +9,6 @@ import { SoundService } from '../../services/sound.service';
 import { Options } from '../../models/options.model';
 import { Fact } from '../../models/fact.model';
 import { MessageResponse } from '../../models/message-response.model';
-import { SeTemperatureComponent } from '../se-temp/se-temperature.component';
-import { ResultComponent } from '../result/result.component';
 
 @Component({
   selector: 'app-se2f',
@@ -58,7 +56,7 @@ export class Se2fComponent implements OnInit, OnDestroy {
   }
 
   changeFrame() {
-    if (this.knowledge.enfermedad) this.frameService.frame.next(ResultComponent);
+    if (this.knowledge.enfermedad) this.frameService.goto('result');
   }
 
   callForwardChaining(form: NgForm) {
@@ -67,7 +65,7 @@ export class Se2fComponent implements OnInit, OnDestroy {
 
   returnToTemperature() {
     this.chainingDataService.reset(this.knowledge.afeccion);
-    this.frameService.frame.next(SeTemperatureComponent);
+    this.frameService.goto('se-temp');
   }
 
   ngOnDestroy() {

@@ -3,8 +3,5 @@
     <span class="main-txt-app">DiagnoCom</span>
     <span class="main-app-logo"></span>
   </div>
-
-  <app-disclaimer *ngIf="!accepted" class="grid center full scroll"></app-disclaimer>
-
-  <ng-container *ngComponentOutlet="frame"></ng-container>
+  <router-outlet></router-outlet>
 </div>

@@ -1,7 +1,7 @@
 <section class="full center home-grid">
     <div class="home-user">
         <i class="pi pi-user"></i>{{ username }}
-        <i class="pi pi-history"></i>{{ lastActivity | date:'short' }}
+        <i class="pi pi-history"></i>{{ lastActivity | date:'mediumDate' }}
     </div>
     <div class="full flex home-options">
         <span class="home-btn option flex" (click)="startDiagnoCom()">

@@ -6,8 +6,6 @@ import { ChainingDataService } from '../../services/chaining-data.service';
 import { FrameService } from '../../services/frame.service';
 import { SoundService } from '../../services/sound.service';
 import { Fact } from '../../models/fact.model';
-import { Se1fComponent } from '../se1f/se1f.component';
-import { Se2fComponent } from '../se2f/se2f.component';
 
 @Component({
   selector: 'app-result',
@@ -23,17 +21,25 @@ export class ResultComponent implements OnInit, OnDestroy {
               private messageService: MessageService, private soundService: SoundService) {}
 
   ngOnInit(): void {
-    this.knowledgeSubs = this.chainingDataService.knowledge.subscribe(data => this.knowledge = data);
+    this.knowledgeSubs = this.chainingDataService.knowledge.subscribe(data => this.checkKnowledge(data));
+  }
+
+  private checkKnowledge(data: Fact) {
+    this.knowledge = data;
+    if (!data.enfermedad) {
+      this.chainingDataService.reset();
+      this.frameService.goto('se1f');
+    }
   }
 
   returnTo1stFrame() {
     this.chainingDataService.reset();
-    this.frameService.frame.next(Se1fComponent);
+    this.frameService.goto('se1f');
   }
 
   returnTo2ndFrame() {
     this.chainingDataService.reset(this.knowledge.afeccion);
-    this.frameService.frame.next(Se2fComponent);
+    this.frameService.goto('se2f');
   }
 
   printResult() {

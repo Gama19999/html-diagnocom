@@ -7,8 +7,6 @@ import { ChainingDataService } from '../../services/chaining-data.service';
 import { FrameService } from '../../services/frame.service';
 import { SoundService } from '../../services/sound.service';
 import { Fact } from '../../models/fact.model';
-import { HomeComponent } from '../home/home.component';
-import { SeTemperatureComponent } from '../se-temp/se-temperature.component';
 
 @Component({
   selector: 'app-se1f',
@@ -43,11 +41,11 @@ export class Se1fComponent implements OnInit, OnDestroy {
     this.chainingDataService.doForwardChain(form.form.value);
   }
 
-  changeFrame = () => this.frameService.frame.next(SeTemperatureComponent);
+  changeFrame = () => this.frameService.goto('se-temp');
 
   returnToHome() {
-    this.frameService.frame.next(HomeComponent);
     this.chainingDataService.reset();
+    this.frameService.goto('home');
   }
 
   ngOnDestroy() {

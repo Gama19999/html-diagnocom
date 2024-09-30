@@ -1,14 +1,16 @@
-<span class="disclaimer-txt-1">
-El presente sistema experto infiere un diagn&oacute;stico m&eacute;dico preliminar basado en los s&iacute;ntomas
-ingresados en la app.<br><br>
-Se cotejan las entradas del usuario contra una base de reglas previas evaluadas por un experto
-en materia de salud para dictaminar un resultado gen&eacute;rico.<br><br>
-Se recomienda acudir al m&eacute;dico para obtener detalles m&aacute;s espec&iacute;ficos si presenta cualquiera de
-los s&iacute;ntomas que se exponen.<br><br>
-Entiendo y estoy de acurdo:
-</span>
-
-<div class="disclaimer-control flex">
-  <input type="button" value="Acepto" class="disclaimer-agree btn" (click)="aceptoClicked()">
-  <input type="button" value="Salir" class="disclaimer-exit btn" (click)="salirClicked()">
-</div>
+<section class="full center disclaimer-grid">
+    <span class="disclaimer-txt-title">Aviso de responsabilidad</span>
+    <span class="disclaimer-txt-content full scroll">
+        El presente sistema experto infiere un diagn&oacute;stico m&eacute;dico preliminar basado en los s&iacute;ntomas
+        ingresados en la app.<br><br>
+        Se cotejan las entradas del usuario contra una base de reglas previas evaluadas por un experto
+        en materia de salud para dictaminar un resultado gen&eacute;rico.<br><br>
+        Se recomienda acudir al m&eacute;dico para obtener detalles m&aacute;s espec&iacute;ficos si presenta cualquiera de
+        los s&iacute;ntomas que se exponen.<br><br>
+        Entiendo y estoy de acurdo:
+    </span>
+    <div class="disclaimer-control flex">
+        <input type="button" value="Acepto" class="disclaimer-agree btn" (click)="aceptoClicked()">
+        <input type="button" value="Salir" class="disclaimer-exit btn" (click)="salirClicked()">
+    </div>
+</section>

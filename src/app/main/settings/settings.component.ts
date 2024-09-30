@@ -6,7 +6,6 @@ import { Subscription } from 'rxjs';
 import { FrameService} from '../../services/frame.service';
 import { SoundService } from '../../services/sound.service';
 import { UserService } from '../../services/user.service';
-import { HomeComponent } from '../home/home.component';
 import { UserData } from '../../models/user-data.model';
 
 @Component({
@@ -71,13 +70,13 @@ export class SettingsComponent implements OnInit, OnDestroy {
         rejectIcon: 'none',
         rejectLabel: 'Cancelar',
         rejectButtonStyleClass: 'settings-cancel-return',
-        accept: () => this.frameService.frame.next(HomeComponent),
+        accept: () => this.frameService.goto('home'),
         reject: () => {
           this.soundService.notificationSound();
           this.messageService.add({ severity: 'warn', summary: 'Atención', detail: 'cambios sin guardar!' })
         }
       });
-    } else this.frameService.frame.next(HomeComponent);
+    } else this.frameService.goto('home');
   }
 
   ngOnDestroy() {

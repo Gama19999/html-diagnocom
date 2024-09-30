@@ -3,8 +3,6 @@ import { Subscription } from 'rxjs';
 
 import { ChainingDataService } from '../../services/chaining-data.service';
 import { FrameService } from '../../services/frame.service';
-import { Se1fComponent } from '../se1f/se1f.component';
-import { Se2fComponent } from '../se2f/se2f.component';
 
 @Component({
   selector: 'app-se-temp',
@@ -32,13 +30,12 @@ export class SeTemperatureComponent implements OnInit, OnDestroy {
 
   returnTo1stFrame() {
     this.chainingDataService.reset();
-    this.frameService.frame.next(Se1fComponent);
+    this.frameService.goto('se1f');
   }
 
   goto2ndFrame() {
     this.chainingDataService.submitTemperature(this.temperature);
-    console.log('Temperatura: ' + this.temperature);
-    this.frameService.frame.next(Se2fComponent);
+    this.frameService.goto('se2f');
   }
 
   ngOnDestroy() {
