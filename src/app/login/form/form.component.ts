@@ -3,11 +3,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 
 import { environment } from '../../../environments/environment';
-import { SoundService } from '../../services/sound.service';
+import { AlertService } from '../../services/alert.service';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-form',
+  selector: 'app-login-form',
   templateUrl: './form.component.html',
   styleUrl: './form.component.css',
   providers: [MessageService]
@@ -16,7 +16,7 @@ export class FormComponent implements OnInit {
   isMobile: boolean = environment.mobile;
   form!: FormGroup;
 
-  constructor(private soundService: SoundService, private messageService: MessageService, private authService: AuthService) {}
+  constructor(private alertService: AlertService, private messageService: MessageService, private authService: AuthService) {}
 
   ngOnInit(): void {
     this.form = new FormGroup({
@@ -34,10 +34,7 @@ export class FormComponent implements OnInit {
   }
 
   private validForm() {
-    if (!this.form.valid) {
-      this.soundService.notificationSound();
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Usuario o Contraseña vacios' });
-    }
+    if (!this.form.valid) this.alertService.error(this.messageService, 'Usuario o Contraseña vacios!');
     return this.form.valid;
   }
 

@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 
 import { environment } from '../../environments/environment';
-import { SoundService } from '../services/sound.service';
+import { AlertService } from '../services/alert.service';
 import { AuthService } from '../services/auth.service';
 import { AuthStatus } from '../models/auth-status.model';
 
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   isBrowserAuth: boolean = false;
   firstAuthMobile!: boolean;
 
-  constructor(private messageService: MessageService, private soundService: SoundService, private router: Router,
+  constructor(private messageService: MessageService, private alertService: AlertService, private router: Router,
               private authService: AuthService, private cookieService: CookieService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
@@ -32,11 +32,9 @@ export class LoginComponent implements OnInit, OnDestroy {
   private checkAppAuth(appAuth: AuthStatus) {
     if (appAuth.authenticated) {
       let title = appAuth.wasRegistration ? 'Registro' : 'Autenticación';
-      this.soundService.notificationSound();
-      this.messageService.add({ severity: 'success', summary: title, detail: 'con éxito!' });
+      this.alertService.success(this.messageService, title, 'con éxito!');
     } else if (appAuth.errorMessage) {
-      this.soundService.notificationSound();
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: appAuth.errorMessage });
+      this.alertService.error(this.messageService, appAuth.errorMessage);
     }
   }
 
@@ -48,8 +46,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   private browserAuth() {
-    this.soundService.notificationSound();
-    this.messageService.add({ severity: 'info', summary: 'Autenticación', detail: 'por contraseña' });
+    this.alertService.info(this.messageService, 'Autenticación', 'por contraseña');
     document.getElementById('login-acceder-btn')!.classList.add('hidden');
     this.isBrowserAuth = true;
     document.getElementById('login-form')!.classList.remove('hidden');
@@ -72,11 +69,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   isAuthSuccess() {
-    if (this.authService.isLogged) this.nextFrame();
-  }
-
-  private nextFrame() {
-    this.router.navigate(['/', 'main'], { relativeTo: this.route });
+    if (this.authService.isLogged) this.router.navigate(['/', 'main'], { relativeTo: this.route });
   }
 
   ngOnDestroy() {

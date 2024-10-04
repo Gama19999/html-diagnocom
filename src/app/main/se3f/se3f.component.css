@@ -1,31 +1,34 @@
-.se2f-grid {
+.se3f-grid {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 8% 5% 80% 7%;
   justify-items: left;
 }
 
-.se2f-txt-title {
+.se3f-txt-title {
   font-size: 1.9rem;
 }
 
-.se2f-txt-directions {
+.se3f-txt-directions {
   font-size: 1.2rem;
 }
 
-.se2f-options {
+.se3f-options {
   align-content: space-around;
 }
 
-.se2f-form {
+.se3f-form {
   align-content: space-around;
+  overflow-y: scroll;
+  padding: 1rem 0;
 }
-
-.se2f-controls {
+.se3f-controls {
   align-items: center;
 }
-
-.se2f-controls .btn {
+.se3f-controls .btn {
   height: fit-content;
   margin-right: 2rem;
+}
+.gap {
+  margin-bottom: 1rem;
 }

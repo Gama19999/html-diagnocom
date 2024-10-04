@@ -1,14 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Subscription } from 'rxjs';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 
 import { ChainingDataService } from '../../services/chaining-data.service';
 import { FrameService } from '../../services/frame.service';
-import { SoundService } from '../../services/sound.service';
-import { Options } from '../../models/options.model';
-import { Fact } from '../../models/fact.model';
-import { MessageResponse } from '../../models/message-response.model';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-se2f',
@@ -17,60 +13,56 @@ import { MessageResponse } from '../../models/message-response.model';
   providers: [MessageService]
 })
 export class Se2fComponent implements OnInit, OnDestroy {
-  private optionsSubs!: Subscription;
-  private knowledgeSubs!: Subscription;
+  private successSubs!: Subscription;
   private errorSubs!: Subscription;
+  private success: boolean = false;
+  private locked: boolean = false;
+  optVars: {[key: string]: string} = {};
+  form: {[key: string]: any} = {'chaining': 'second'};
 
-  knowledge!: Fact;
-  options!: Options;
-
-  constructor(private chainingDataService: ChainingDataService, private frameService: FrameService,
-              private messageService: MessageService, private soundService: SoundService) {}
+  constructor(private chainingDataService: ChainingDataService, private messageService: MessageService,
+              private frameService: FrameService, private alertService: AlertService) {}
 
   ngOnInit() {
-    this.optionsSubs = this.chainingDataService.options.subscribe(data => this.options = data);
-    this.knowledgeSubs = this.chainingDataService.knowledge.subscribe(data => this.handleKnowledge(data));
-    this.errorSubs = this.chainingDataService.lastError.subscribe(errorData => this.checkChainingError(errorData));
+    for (let opt in this.chainingDataService.optValues) {
+      this.optVars[opt] = this.chainingDataService.optValues[opt].txt;
+      this.form[opt] = this.chainingDataService.optValues[opt].value;
+    }
+    this.successSubs = this.chainingDataService.success.subscribe(chainingData => {
+      this.success = true;
+      this.alertService.info(this.messageService, chainingData['localizacion'].txt, chainingData['localizacion'].value);
+    });
+    this.errorSubs = this.chainingDataService.error.subscribe(failure => this.alertService.error(this.messageService, failure.data));
   }
 
-  private handleKnowledge(data: Fact) {
-    this.knowledge = data;
-    if (data.enfermedad) {
-        this.soundService.notificationSound();
-        this.messageService.add({ severity: 'info', summary: '2do Encadenamiento', detail: this.knowledge.enfermedad });
+  validateChoices(clicked: string) {
+    if (this.allowClick()) {
+      this.form[clicked] = 'si';
+      this.chainingDataService.optValues[clicked].value = 'si';
+      for (let control in this.form)
+        if (control !== 'chaining' && control !== 'grados' && control !== clicked) this.form[control] = 'no';
+      this.chainingDataService.doForwardChain(this.form);
     }
   }
 
-  private checkChainingError(error: MessageResponse) {
-    if (error.status === 404) {
-      this.soundService.notificationSound();
-      this.messageService.add({ severity: 'warn', summary: 'Atención', detail: error.data });
+  private allowClick() {
+    if (!this.locked) {
+      this.locked = true;
+      return true;
+    } else {
+      this.alertService.warn(this.messageService, 'Por favor espere');
+      return false;
     }
   }
 
-  validateChoice(clicked: string, form: NgForm) {
-    let value = form.form.controls[clicked].value;
-    form.form.controls[clicked].setValue(value === 'si' ? 'no' : 'si');
-    if (value === 'si') document.getElementById(clicked)!.classList.remove('selected');
-    else document.getElementById(clicked)!.classList.add('selected');
-  }
+  goHome = () => this.frameService.goto('home', true);
 
-  changeFrame() {
-    if (this.knowledge.enfermedad) this.frameService.goto('result');
-  }
-
-  callForwardChaining(form: NgForm) {
-    this.chainingDataService.doForwardChain(form.form.value);
-  }
-
-  returnToTemperature() {
-    this.chainingDataService.reset(this.knowledge.afeccion);
-    this.frameService.goto('se-temp');
+  nextAllowed() {
+    if (this.success) this.frameService.goto('se3f', true);
   }
 
   ngOnDestroy() {
-    if (this.optionsSubs) this.optionsSubs.unsubscribe();
-    if (this.knowledgeSubs) this.knowledgeSubs.unsubscribe();
+    if (this.successSubs) this.successSubs.unsubscribe();
     if (this.errorSubs) this.errorSubs.unsubscribe();
   }
 }

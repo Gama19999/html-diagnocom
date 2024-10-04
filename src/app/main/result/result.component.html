@@ -1,19 +1,28 @@
 <section class="full center result-grid">
-  <span class="result-txt-title">Diagn&oacute;stico Preeliminar</span>
-  <span class="result-txt-directions">Resultado inferido de los s&iacute;ntomas ingresados.</span>
-  <div class="result-content flex full">
-    <div class="flex full-w">
-      <span class="result-txt-directions center-txt">Afecci&oacute;n detectada</span>
-      <span id="afeccion" class="option full-w">{{ knowledge.afeccion }}</span>
+  <span class="result-txt-title">Nota de diagn&oacute;stico preeliminar</span>
+  <span class="result-txt-directions">Resultado inferido por los datos ingresados.</span>
+  <div class="result-content full">
+    <div class="result-app flex c23 r1">DiagnoCom <span class="app-logo"></span></div>
+    <span class="result-txt-date c1 r1"><i class="pi pi-calendar"></i>{{ date | date:'medium' }}</span>
+    <span class="result-txt-id c1 r2"><i class="pi pi-hashtag"></i>{{ result_id }}</span>
+    <span class="result-txt-username c1 r3"><i class="pi pi-user"></i>{{ username }}</span>
+    <div class="result-facts table full">
+      <span class="cw r1 center-txt">Hechos inferidos</span>
+      <span class="c2 r2">{{ chainingData['temperatura'].txt }}</span>
+      <span class="c3 r2">
+        {{ chainingData['temperatura'].value + ' (' + chainingData['grados'].value + ' ' + chainingData['grados'].txt + ')' }}
+      </span>
+      <span class="c2 r3">{{ chainingData['localizacion'].txt }}</span>
+      <span class="c3 r3">{{ chainingData['localizacion'].value }}</span>
+      <span class="c2 r4">{{ chainingData['enfermedad'].txt }}</span>
+      <span class="c3 r4">{{ chainingData['enfermedad'].value }}</span>
     </div>
-    <div class="flex full-w">
-      <span class="result-txt-directions center-txt">Enfermedad inferida</span>
-      <span id="enfermedad" class="option full-w">{{ knowledge.enfermedad }}</span>
-    </div>
+    <span class="result-txt-footer footer center-txt">
+        Diagn&oacute;stico inferido por DiagnoCom&reg; | 2024
+    </span>
   </div>
   <div class="result-controls full flex">
-    <input type="button" class="btn" value="Regresar" (click)="returnTo2ndFrame()" />
-    <input type="button" class="btn" value="Reiniciar" (click)="returnTo1stFrame()" />
+    <input type="button" class="btn" value="Inicio" (click)="goHome()" />
     <input type="button" class="btn" value="Imprimir" (click)="printResult()" />
   </div>
   <p-toast [life]="3000" [breakpoints]="{'1000px': {width: '95%', right: '2.5%'}}" />

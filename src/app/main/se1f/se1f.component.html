@@ -1,18 +1,16 @@
 <section class="full center se1f-grid">
-  <span class="se1f-txt-title">Lugar del malestar</span>
-  <span class="se1f-txt-directions">Seleccione la opci&oacute;n que identifique donde presenta la incomodidad.</span>
-  <div class="se1f-options full">
-    <form class="full flex se1f-form" #se1f="ngForm" (click)="validateChoices($event.target, se1f)">
-      <span class="option">En la cabeza<input type="hidden" name="afeccionCabeza" ngModel /></span>
-      <span class="option">Al respirar<input type="hidden" name="afeccionRespiratoria" ngModel /></span>
-      <span class="option">Tras comer o ir al sanitario<input type="hidden" name="afeccionDigestiva" ngModel /></span>
-      <span class="option">En el abdomen o espalda<input type="hidden" name="afeccionInterna" ngModel /></span>
-      <span class="option">Al orinar<input type="hidden" name="afeccionUrinaria" ngModel /></span>
-      <span class="option">En la piel<input type="hidden" name="afeccionPiel" ngModel /></span>
-    </form>
-  </div>
-  <div class="se1f-controls full flex">
-    <input type="button" class="btn" value="Regresar" (click)="returnToHome()" />
-  </div>
-  <p-toast [life]="5000" [breakpoints]="{'1000px': {width: '95%', right: '2.5%'}}" (onClose)="changeFrame()" />
+    <span class="se1f-txt-title">Temperatura corporal</span>
+    <span class="se1f-txt-directions">Ajuste el control para capturar su temperatura corporal actual.</span>
+    <div class="full flex">
+        <form ngForm class="grid center full">
+            <input type="text" class="input se1f-grados" name="grados" value="{{ form['grados'] + ' &deg;C' }}" readonly />
+            <p-slider class="input se1f-slider" name="grados" [(ngModel)]="form['grados']"
+                      [step]="0.1" [min]="35.0" [max]="42.0" [autofocus]="true" />
+        </form>
+    </div>
+    <div class="se1f-controls full flex">
+        <input type="button" class="btn" value="Inicio" (click)="goHome()" />
+        <input type="button" class="btn" value="Siguiente" (click)="validateChoice()" />
+    </div>
+    <p-toast [life]="3000" [breakpoints]="{'1000px': {width: '95%', right: '2.5%'}}" (onClose)="nextAllowed()" />
 </section>

@@ -25,9 +25,7 @@ export class DisclaimerComponent implements OnInit, OnDestroy {
     this.frameService.goto('home');
   }
 
-  salirClicked() {
-    this.authService.logout();
-  }
+  salirClicked = () => this.authService.logout();
 
   ngOnDestroy() {
     if (this.disclaimerSubs) this.disclaimerSubs.unsubscribe();

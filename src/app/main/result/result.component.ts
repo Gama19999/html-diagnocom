@@ -1,11 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
 import { MessageService } from 'primeng/api';
+import { Subscription } from 'rxjs';
 
+import { environment } from '../../../environments/environment';
 import { ChainingDataService } from '../../services/chaining-data.service';
 import { FrameService } from '../../services/frame.service';
-import { SoundService } from '../../services/sound.service';
-import { Fact } from '../../models/fact.model';
+import { AlertService } from '../../services/alert.service';
+import { GeneralOptions } from '../../models/brb/general-options.model';
 
 @Component({
   selector: 'app-result',
@@ -14,40 +15,29 @@ import { Fact } from '../../models/fact.model';
   providers: [MessageService]
 })
 export class ResultComponent implements OnInit, OnDestroy {
-  private knowledgeSubs!: Subscription;
-  knowledge!: Fact;
+  private errorSubs!: Subscription;
+  chainingData!: GeneralOptions;
+  date: Date = new Date();
+  result_id: string = 'abcd-1111-abcdef-0000-abcd';
+  username: string = 'gama';
 
   constructor(private chainingDataService: ChainingDataService, private frameService: FrameService,
-              private messageService: MessageService, private soundService: SoundService) {}
+              private messageService: MessageService, private alertService: AlertService) {}
 
   ngOnInit(): void {
-    this.knowledgeSubs = this.chainingDataService.knowledge.subscribe(data => this.checkKnowledge(data));
+    this.chainingData = this.chainingDataService.chainingData;
+    this.errorSubs = this.chainingDataService.error.subscribe(failure => this.alertService.warn(this.messageService, failure.data));
   }
 
-  private checkKnowledge(data: Fact) {
-    this.knowledge = data;
-    if (!data.enfermedad) {
-      this.chainingDataService.reset();
-      this.frameService.goto('se1f');
-    }
-  }
-
-  returnTo1stFrame() {
-    this.chainingDataService.reset();
-    this.frameService.goto('se1f');
-  }
-
-  returnTo2ndFrame() {
-    this.chainingDataService.reset(this.knowledge.afeccion);
-    this.frameService.goto('se2f');
-  }
+  goHome = () => this.frameService.goto('home', true);
 
   printResult() {
-    this.soundService.notificationSound();
-    this.messageService.add({ severity: 'secondary', summary: 'Imprimiendo', detail: 'Feature not activated!' });
+    this.alertService.info(this.messageService, 'Generando PDF', 'del resultado!');
+    if (!environment.mobile) window.print();
+    else this.alertService.warn(this.messageService, 'Testing on cordova!');
   }
 
   ngOnDestroy(): void {
-    if (this.knowledgeSubs) this.knowledgeSubs.unsubscribe();
+    if (this.errorSubs) this.errorSubs.unsubscribe();
   }
 }

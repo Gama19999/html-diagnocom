@@ -4,7 +4,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 
 import { FrameService} from '../../services/frame.service';
-import { SoundService } from '../../services/sound.service';
+import { AlertService } from '../../services/alert.service';
 import { UserService } from '../../services/user.service';
 import { UserData } from '../../models/user-data.model';
 
@@ -20,7 +20,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
   form!: FormGroup;
 
   constructor(private frameService: FrameService, private confirmService: ConfirmationService,
-              private messageService: MessageService, private soundService: SoundService,
+              private messageService: MessageService, private alertService: AlertService,
               private userService: UserService) {}
 
   ngOnInit() {
@@ -35,12 +35,9 @@ export class SettingsComponent implements OnInit, OnDestroy {
 
   private checkUserData(data: UserData) {
     this.userData = data;
-    if (data.error) {
-      this.soundService.notificationSound();
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: data.error });
-    } else if (this.form.touched) {
-      this.soundService.notificationSound();
-      this.messageService.add({ severity: 'success', summary: 'Operación', detail: 'exitosa!' });
+    if (data.error) this.alertService.error(this.messageService, data.error);
+    else if (this.form.touched) {
+      this.alertService.success(this.messageService, 'Operación', 'exitosa!');
       this.form.reset({username: this.userData.username, email: this.userData.email});
     }
   }
@@ -50,16 +47,13 @@ export class SettingsComponent implements OnInit, OnDestroy {
   }
 
   private validForm() {
-    if (!this.form.valid) {
-      this.soundService.notificationSound();
-      this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Campos requeridos vacios' });
-    }
+    if (!this.form.valid) this.alertService.error(this.messageService, 'Campos requeridos vacios');
     return this.form.valid;
   }
 
   returnToHome() {
     if (this.form.touched) {
-      this.soundService.notificationSound();
+      this.alertService.notificationSound();
       this.confirmService.confirm({
         message: '¿Descartar los cambios?',
         header: 'Atención',
@@ -71,10 +65,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
         rejectLabel: 'Cancelar',
         rejectButtonStyleClass: 'settings-cancel-return',
         accept: () => this.frameService.goto('home'),
-        reject: () => {
-          this.soundService.notificationSound();
-          this.messageService.add({ severity: 'warn', summary: 'Atención', detail: 'cambios sin guardar!' })
-        }
+        reject: () => this.alertService.warn(this.messageService, 'cambios sin guardar!')
       });
     } else this.frameService.goto('home');
   }

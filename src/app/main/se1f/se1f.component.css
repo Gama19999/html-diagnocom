@@ -1,31 +1,40 @@
 .se1f-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 8% 5% 80% 7%;
-  justify-items: left;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 8% 5% 80% 7%;
+    justify-items: left;
 }
 
 .se1f-txt-title {
-  font-size: 1.9rem;
+    font-size: 1.9rem;
 }
 
 .se1f-txt-directions {
-  font-size: 1.2rem;
+    font-size: 1.2rem;
 }
 
-.se1f-options {
-  align-content: space-around;
+input, p-slider {
+    grid-column: 2;
 }
 
-.se1f-form {
-  align-content: space-around;
+.se1f-grados {
+    width: 14%;
+    height: fit-content;
+    font-size: 2rem;
+    text-align: center;
+}
+
+.se1f-slider {
+    height: 2.1rem;
+    width: 50%;
+    background-color: white;
 }
 
 .se1f-controls {
-  align-items: center;
+    align-items: center;
 }
 
 .se1f-controls .btn {
-  height: fit-content;
-  margin-right: 2rem;
+    height: fit-content;
+    margin-right: 2rem;
 }

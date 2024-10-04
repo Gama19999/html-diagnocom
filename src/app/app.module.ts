@@ -7,7 +7,7 @@ import { ToastModule } from 'primeng/toast';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { DialogModule } from 'primeng/dialog';
-import { KnobModule } from 'primeng/knob';
+import { SliderModule } from 'primeng/slider';
 import { CookieService } from 'ngx-cookie-service';
 
 import { AppRoutingModule } from './app-routing.module'
@@ -20,9 +20,9 @@ import { DisclaimerComponent } from './main/disclaimer/disclaimer.component';
 import { HomeComponent } from './main/home/home.component';
 import { Se1fComponent } from './main/se1f/se1f.component';
 import { Se2fComponent } from './main/se2f/se2f.component';
+import { Se3fComponent } from './main/se3f/se3f.component';
 import { ResultComponent } from './main/result/result.component';
 import { SettingsComponent } from './main/settings/settings.component';
-import { SeTemperatureComponent } from './main/se-temp/se-temperature.component';
 
 @NgModule({
   declarations: [
@@ -34,9 +34,9 @@ import { SeTemperatureComponent } from './main/se-temp/se-temperature.component'
     HomeComponent,
     Se1fComponent,
     Se2fComponent,
+    Se3fComponent,
     ResultComponent,
-    SettingsComponent,
-    SeTemperatureComponent
+    SettingsComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +48,7 @@ import { SeTemperatureComponent } from './main/se-temp/se-temperature.component'
     InputSwitchModule,
     ConfirmDialogModule,
     DialogModule,
-    KnobModule
+    SliderModule
   ],
   providers: [
     provideHttpClient(withInterceptors([authInterceptor])),

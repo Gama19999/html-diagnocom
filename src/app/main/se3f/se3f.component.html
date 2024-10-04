@@ -1,0 +1,20 @@
+<section class="full center se3f-grid">
+  <span class="se3f-txt-title">S&iacute;ntomas presentes</span>
+  <span class="se3f-txt-directions">Seleccione las opciones que identifique como s&iacute;ntomas.</span>
+  <div class="se3f-options full">
+    <form class="full flex se3f-form" ngForm>
+      @for (opt of form | keyvalue; track $index) {
+        <ng-container *ngIf="!opt.key.startsWith('loc') && opt.key !== 'chaining' && opt.key !== 'grados'">
+          <span id="{{opt.key}}" class="option" [ngClass]="{'gap': $count > 6}" (click)="validateChoice(opt.key)">
+            {{optVars[opt.key]}}<input type="hidden" name="{{opt.key}}" [(ngModel)]="form[opt.key]" />
+          </span>
+        </ng-container>
+      }
+    </form>
+  </div>
+  <div class="se3f-controls full flex">
+    <input type="button" class="btn" value="Inicio" (click)="goHome()" />
+    <input type="button" class="btn" value="Ver resultado" (click)="getResult()" />
+  </div>
+  <p-toast [life]="3000" [breakpoints]="{'1000px': {width: '95%', right: '2.5%'}}" (onClose)="nextAllowed()" />
+</section>
