@@ -32,9 +32,12 @@ export class ResultComponent implements OnInit, OnDestroy {
   goHome = () => this.frameService.goto('home', true);
 
   printResult() {
-    this.alertService.info(this.messageService, 'Generando PDF', 'del resultado!');
-    if (!environment.mobile) window.print();
-    else this.alertService.warn(this.messageService, 'Testing on cordova!');
+    if (environment.mobile) {
+      //this.alertService.info(this.messageService, 'Guardando imagen', 'del resultado!');
+      this.alertService.warn(this.messageService, 'Caracteristica en pruebas!');
+      // @ts-ignore cordova saveResultPic(fileName)
+      app.saveResultPic('fileName');
+    } else window.print();
   }
 
   ngOnDestroy(): void {
