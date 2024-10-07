@@ -6,7 +6,7 @@ import { environment } from '../../../environments/environment';
 import { ChainingDataService } from '../../services/chaining-data.service';
 import { FrameService } from '../../services/frame.service';
 import { AlertService } from '../../services/alert.service';
-import { GeneralOptions } from '../../models/brb/general-options.model';
+import { ResultResponse } from '../../models/brb/result-response.model';
 
 @Component({
   selector: 'app-result',
@@ -16,16 +16,13 @@ import { GeneralOptions } from '../../models/brb/general-options.model';
 })
 export class ResultComponent implements OnInit, OnDestroy {
   private errorSubs!: Subscription;
-  chainingData!: GeneralOptions;
-  date: Date = new Date();
-  result_id: string = 'abcd-1111-abcdef-0000-abcd';
-  username: string = 'gama';
+  resultResponse!: ResultResponse;
 
   constructor(private chainingDataService: ChainingDataService, private frameService: FrameService,
               private messageService: MessageService, private alertService: AlertService) {}
 
   ngOnInit(): void {
-    this.chainingData = this.chainingDataService.chainingData;
+    this.resultResponse = this.chainingDataService.resultData;
     this.errorSubs = this.chainingDataService.error.subscribe(failure => this.alertService.warn(this.messageService, failure.data));
   }
 
@@ -33,11 +30,15 @@ export class ResultComponent implements OnInit, OnDestroy {
 
   printResult() {
     if (environment.mobile) {
-      //this.alertService.info(this.messageService, 'Guardando imagen', 'del resultado!');
-      this.alertService.warn(this.messageService, 'Caracteristica en pruebas!');
+      this.toggleSaveView();
       // @ts-ignore cordova saveResultPic(fileName)
-      app.saveResultPic('fileName');
+      app.saveResultPic('DiagnoCom - ' + this.resultResponse.resultId);
     } else window.print();
+  }
+
+  private toggleSaveView() {
+    document.getElementsByClassName('main-header').item(0)!.classList.add('hidden');
+    document.getElementsByClassName('result-controls').item(0)!.classList.add('hidden');
   }
 
   ngOnDestroy(): void {

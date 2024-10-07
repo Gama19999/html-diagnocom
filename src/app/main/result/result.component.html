@@ -3,19 +3,19 @@
   <span class="result-txt-directions">Resultado inferido por los datos ingresados.</span>
   <div class="result-content full">
     <div class="result-app flex c23 r1">DiagnoCom <span class="app-logo"></span></div>
-    <span class="result-txt-date c1 r1"><i class="pi pi-calendar"></i>{{ date | date:'medium' }}</span>
-    <span class="result-txt-id c1 r2"><i class="pi pi-hashtag"></i>{{ result_id }}</span>
-    <span class="result-txt-username c1 r3"><i class="pi pi-user"></i>{{ username }}</span>
+    <span class="result-txt-date c1 r1"><i class="pi pi-calendar"></i>{{ resultResponse.resultDate | date:'medium' }}</span>
+    <span class="result-txt-id cw r2"><i class="pi pi-hashtag"></i>{{ resultResponse.resultId }}</span>
+    <span class="result-txt-username c1 r3"><i class="pi pi-user"></i>{{ resultResponse.username }}</span>
     <div class="result-facts table full">
       <span class="cw r1 center-txt">Hechos inferidos</span>
-      <span class="c2 r2">{{ chainingData['temperatura'].txt }}</span>
+      <span class="c2 r2">{{ resultResponse.content['temperatura'].txt }}</span>
       <span class="c3 r2">
-        {{ chainingData['temperatura'].value + ' (' + chainingData['grados'].value + ' ' + chainingData['grados'].txt + ')' }}
+        {{ resultResponse.content['temperatura'].value + ' (' + resultResponse.content['grados'].value + ' ' + resultResponse.content['grados'].txt + ')' }}
       </span>
-      <span class="c2 r3">{{ chainingData['localizacion'].txt }}</span>
-      <span class="c3 r3">{{ chainingData['localizacion'].value }}</span>
-      <span class="c2 r4">{{ chainingData['enfermedad'].txt }}</span>
-      <span class="c3 r4">{{ chainingData['enfermedad'].value }}</span>
+      <span class="c2 r3">{{ resultResponse.content['localizacion'].txt }}</span>
+      <span class="c3 r3">{{ resultResponse.content['localizacion'].value }}</span>
+      <span class="c2 r4">{{ resultResponse.content['enfermedad'].txt }}</span>
+      <span class="c3 r4">{{ resultResponse.content['enfermedad'].value }}</span>
     </div>
     <span class="result-txt-footer footer center-txt">
         Diagn&oacute;stico inferido por DiagnoCom&reg; | 2024

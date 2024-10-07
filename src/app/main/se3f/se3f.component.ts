@@ -13,7 +13,7 @@ import { AlertService } from '../../services/alert.service';
   providers: [MessageService]
 })
 export class Se3fComponent implements OnInit, OnDestroy {
-  private successSubs!: Subscription;
+  private resultSubs!: Subscription;
   private errorSubs!: Subscription;
   private success: boolean = false;
   optVars: {[key: string]: string} = {};
@@ -27,9 +27,9 @@ export class Se3fComponent implements OnInit, OnDestroy {
       this.optVars[opt] = this.chainingDataService.optValues[opt].txt;
       this.form[opt] = this.chainingDataService.optValues[opt].value;
     }
-    this.successSubs = this.chainingDataService.success.subscribe(chainingData => {
+    this.resultSubs = this.chainingDataService.final.subscribe(result => {
       this.success = true;
-      this.alertService.info(this.messageService, chainingData['enfermedad'].txt, chainingData['enfermedad'].value);
+      this.alertService.info(this.messageService, result.content['enfermedad'].txt, result.content['enfermedad'].value);
     });
     this.errorSubs = this.chainingDataService.error.subscribe(failure => this.alertService.warn(this.messageService, failure.data));
   }
@@ -59,7 +59,7 @@ export class Se3fComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.successSubs) this.successSubs.unsubscribe();
+    if (this.resultSubs) this.resultSubs.unsubscribe();
     if (this.errorSubs) this.errorSubs.unsubscribe();
   }
 }

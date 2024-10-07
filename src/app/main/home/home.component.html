@@ -7,12 +7,17 @@
         <span class="home-btn option flex" (click)="startDiagnoCom()">
             <i class="pi pi-chevron-circle-right"></i>Iniciar sistema experto
         </span>
-        <span class="home-btn option flex">
-            <i class="pi pi-book"></i>Reglas de producción
+        <a class="home-btn option flex" href="https://diagnocom.serial30.ovh/prod-rules/prod-rules.pdf"
+           download="Reglas de produccion DiagnoCom.pdf" target="{{ mobile ? '_self' : '_blank' }}">
+            <i class="pi pi-file-pdf"></i>Reglas de producci&oacute;n
+        </a>
+        <span class="home-btn option flex" (click)="goToResults()">
+            <i class="pi pi-briefcase"></i>Resultados guardados
         </span>
         <span class="home-btn option flex" (click)="goToSettings()">
             <i class="pi pi-cog"></i>Ajustes de usuario
         </span>
     </div>
     <input type="button" value="Salir" class="btn" (click)="exit()"/>
+    <p-toast [life]="2000" [breakpoints]="{'1000px': {width: '95%', right: '2.5%'}}" />
 </section>
