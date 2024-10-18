@@ -33,8 +33,13 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "src/assets/",
-                "output": "/assets/"
+                "input": "src/assets/sounds",
+                "output": "/media/"
+              },
+              {
+                "glob": "**/diagnocom.webp",
+                "input": "src/assets/images/icon/",
+                "output": "/media/"
               }
             ],
             "styles": [

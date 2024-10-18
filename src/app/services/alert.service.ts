@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { Howl } from 'howler';
+import {environment} from "../../environments/environment";
 
 @Injectable({ providedIn: 'root' })
 export class AlertService {
@@ -8,7 +9,7 @@ export class AlertService {
 
   constructor() {
     this.notification = new Howl({
-      src: ['../../assets/sounds/land3.mp3'],
+      src: [environment.sound],
       html5: true
     });
   }
