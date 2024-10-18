@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 
@@ -17,28 +18,44 @@ import { ResultResponse } from '../../models/brb/result-response.model';
 export class ResultComponent implements OnInit, OnDestroy {
   private errorSubs!: Subscription;
   resultResponse!: ResultResponse;
+  isResolved: boolean = false;
 
   constructor(private chainingDataService: ChainingDataService, private frameService: FrameService,
-              private messageService: MessageService, private alertService: AlertService) {}
+              private messageService: MessageService, private alertService: AlertService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.resultResponse = this.chainingDataService.resultData;
+    this.isResolvedData();
     this.errorSubs = this.chainingDataService.error.subscribe(failure => this.alertService.warn(this.messageService, failure.data));
   }
 
-  goHome = () => this.frameService.goto('home', true);
+  private isResolvedData() {
+    const resolvedData = this.route.snapshot.data['resultResolver'];
+    this.resultResponse = resolvedData ? resolvedData : this.chainingDataService.resultData;
+    if (resolvedData) {
+      this.isResolved = true;
+      document.title = 'DiagnoCom - ' + this.resultResponse.resultId;
+      document.getElementById('result')!.classList.add('result-id');
+      document.getElementById('result')!.classList.add(this.resultResponse.content['localizacion'].value + '-bg');
+    }
+  }
+
+  goHome() {
+    if (this.isResolved) this.frameService.goto('disclaimer');
+    else this.frameService.goto('home', true);
+  }
 
   printResult() {
     if (environment.mobile) {
       this.toggleSaveView();
-      // @ts-ignore cordova saveResultPic(fileName)
-      app.saveResultPic('DiagnoCom - ' + this.resultResponse.resultId);
+      this.alertService.warn(this.messageService, 'en pruebas!');
     } else window.print();
   }
 
   private toggleSaveView() {
-    document.getElementsByClassName('main-header').item(0)!.classList.add('hidden');
-    document.getElementsByClassName('result-controls').item(0)!.classList.add('hidden');
+    if (!this.isResolved) {
+      document.getElementsByClassName('main-header').item(0)!.classList.add('hidden');
+      document.getElementsByClassName('result-controls').item(0)!.classList.add('hidden');
+    }
   }
 
   ngOnDestroy(): void {

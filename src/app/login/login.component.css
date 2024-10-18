@@ -1,7 +1,3 @@
-.login-bg {
-  background: url("../../assets/images/login_bk.webp") 100% 100% / 100% 100% no-repeat;
-}
-
 .login-grid {
   grid-template-rows: 20% 30% 15% 25% 1fr;
 }
@@ -9,7 +5,7 @@
 .login-grid > * { grid-column: 2; }
 
 .login-logo {
-  background: url("../../assets/images/diagnocom.webp") 50% 50% / 10% 60% no-repeat;
+  background: url("../../assets/images/icon/diagnocom.webp") 50% 50% / 10% 60% no-repeat;
 }
 
 .login-acceder {

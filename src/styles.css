@@ -94,6 +94,15 @@ app-home, app-se1f, app-se2f, app-se3f, app-result, app-settings {
 
 
 /**** CLASSES ****/
+.login-bg { background: url("./assets/images/pc/login.webp") 100% 100% / 100% 100% no-repeat; }
+.main-bg { background: url("./assets/images/pc/main.webp") 50% 50% / 100% 100% no-repeat; }
+.cabeza-bg { background: url("./assets/images/pc/cabeza.webp") 50% 50% / 100% 100% no-repeat; }
+.respiratoria-bg { background: url("./assets/images/pc/respiratoria.webp") 50% 50% / 100% 100% no-repeat; }
+.digestiva-bg { background: url("./assets/images/pc/digestiva.webp") 50% 50% / 100% 100% no-repeat; }
+.interna-bg { background: url("./assets/images/pc/interna.webp") 50% 50% / 100% 100% no-repeat; }
+.urinaria-bg { background: url("./assets/images/pc/urinaria.webp") 50% 50% / 100% 100% no-repeat; }
+.cutanea-bg { background: url("./assets/images/pc/cutanea.webp") 50% 50% / 100% 100% no-repeat; }
+.settings-bg { background: url("./assets/images/pc/settings.webp") 0 50% / 180% 100% no-repeat; }
 .btn {
   border: 0;
   border-radius: 15px;
@@ -147,6 +156,8 @@ app-home, app-se1f, app-se2f, app-se3f, app-result, app-settings {
 input.ng-touched.ng-invalid {
   box-shadow: 3px 4px 5px 0 rgba(0,0,0,0.4), inset 0 0 1px 100px rgba(255,0,0,0.3);
 }
+.hidden { display: none; }
+.result-id { padding: 3rem 3rem 0 3rem; }
 
 
 /**** FONTS ****/
@@ -158,9 +169,18 @@ input.ng-touched.ng-invalid {
 
 /**** MEDIA QUERIES ****/
 @media (max-width: 1000px) {
+  .login-bg { background: url("./assets/images/mobile/login.webp") 100% 100% / 100% 100% no-repeat; }
+  .main-bg { background: url("./assets/images/mobile/main.webp") 50% 50% / 100% 100% no-repeat; }
+  .cabeza-bg { background: url("./assets/images/mobile/cabeza.webp") 50% 50% / 100% 100% no-repeat; }
+  .respiratoria-bg { background: url("./assets/images/mobile/respiratoria.webp") 50% 50% / 100% 100% no-repeat; }
+  .digestiva-bg { background: url("./assets/images/mobile/digestiva.webp") 50% 50% / 100% 100% no-repeat; }
+  .interna-bg { background: url("./assets/images/mobile/interna.webp") 50% 50% / 100% 100% no-repeat; }
+  .urinaria-bg { background: url("./assets/images/mobile/urinaria.webp") 50% 50% / 100% 100% no-repeat; }
+  .cutanea-bg { background: url("./assets/images/mobile/cutanea.webp") 50% 50% / 100% 100% no-repeat; }
+  .settings-bg { background: url("./assets/images/mobile/settings.webp") 0 50% / 180% 100% no-repeat; }
   .scroll, app-disclaimer { overflow-y: scroll; }
   .login-title { font-size: 4rem !important; }
-  .login-logo { background: url("./assets/images/diagnocom.webp") 50% 50% / 40% 60% no-repeat !important; }
+  .login-logo { background: url("./assets/images/icon/diagnocom.webp") 50% 50% / 40% 60% no-repeat !important; }
   .login-txt-1 {
     font-size: 1.5rem !important;
     width: 100% !important;
@@ -198,6 +218,7 @@ input.ng-touched.ng-invalid {
     width: 1.9rem !important;
     height: 2rem !important;
   }
+  .result-id { padding: 3rem 1rem 0 1rem; }
   .result-txt-date, .result-txt-username { grid-column: 1 / 3 !important; }
   .result-txt-date, .result-txt-id { font-size: 0.8rem !important; }
   .table { grid-template-columns: 1% repeat(2, 1fr) !important; }
@@ -211,6 +232,15 @@ input.ng-touched.ng-invalid {
 }
 
 @media print {
+  .login-bg { background: url("./assets/images/mobile/login.webp") 100% 100% / 100% 100% no-repeat; }
+  .main-bg { background: url("./assets/images/mobile/main.webp") 50% 50% / 100% 100% no-repeat; }
+  .cabeza-bg { background: url("./assets/images/mobile/cabeza.webp") 50% 50% / 100% 100% no-repeat; }
+  .respiratoria-bg { background: url("./assets/images/mobile/respiratoria.webp") 50% 50% / 100% 100% no-repeat; }
+  .digestiva-bg { background: url("./assets/images/mobile/digestiva.webp") 50% 50% / 100% 100% no-repeat; }
+  .interna-bg { background: url("./assets/images/mobile/interna.webp") 50% 50% / 100% 100% no-repeat; }
+  .urinaria-bg { background: url("./assets/images/mobile/urinaria.webp") 50% 50% / 100% 100% no-repeat; }
+  .cutanea-bg { background: url("./assets/images/mobile/cutanea.webp") 50% 50% / 100% 100% no-repeat; }
+  .settings-bg { background: url("./assets/images/mobile/settings.webp") 0 50% / 180% 100% no-repeat; }
   .main-grid div { display: none; }
   .result-txt-title, .result-app { font-size: 2rem !important; }
   .result-txt-directions { font-size: 1.3rem !important; }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+
+import { FrameService } from '../services/frame.service';
 
 @Component({
   selector: 'app-main',
@@ -8,8 +9,8 @@ import { Router } from '@angular/router';
 })
 export class MainComponent {
 
-  constructor(private router: Router) {
-    this.router.navigate(['/', 'main', 'disclaimer']);
+  constructor(private frameService: FrameService) {
+    this.frameService.goto('disclaimer', true);
   }
 
 }

@@ -24,6 +24,7 @@ export class HomeComponent implements OnInit, OnDestroy {
               private messageService: MessageService, private alertService: AlertService) {}
 
   ngOnInit() {
+    this.frameService.home();
     this.userService.loadUserData();
     this.userDataSubs = this.userService.userData.subscribe(user => {
       this.username = user.username;
@@ -31,7 +32,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
   }
 
-  startDiagnoCom = () => this.frameService.goto('se1f');
+  startDiagnoCom = () => this.frameService.goto('se1f', true);
 
   goToResults = () => this.alertService.warn(this.messageService, 'función desactivada!');
 

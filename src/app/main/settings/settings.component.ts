@@ -24,6 +24,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
               private userService: UserService) {}
 
   ngOnInit() {
+    this.frameService.settings();
     this.userDataSubs = this.userService.userData.subscribe(user => this.checkUserData(user));
     this.form = new FormGroup({
       username: new FormControl(this.userData.username, Validators.required),
@@ -67,7 +68,7 @@ export class SettingsComponent implements OnInit, OnDestroy {
         accept: () => this.frameService.goto('home'),
         reject: () => this.alertService.warn(this.messageService, 'cambios sin guardar!')
       });
-    } else this.frameService.goto('home');
+    } else this.frameService.goto('home', true);
   }
 
   ngOnDestroy() {

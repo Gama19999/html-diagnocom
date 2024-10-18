@@ -55,7 +55,7 @@ export class Se3fComponent implements OnInit, OnDestroy {
   goHome = () => this.frameService.goto('home', true);
 
   nextAllowed() {
-    if (this.success) this.frameService.goto('result', true);
+    if (this.success) this.frameService.goto('se-result', true);
   }
 
   ngOnDestroy() {

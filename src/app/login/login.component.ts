@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
@@ -21,12 +21,11 @@ export class LoginComponent implements OnInit, OnDestroy {
   firstAuthMobile!: boolean;
 
   constructor(private messageService: MessageService, private alertService: AlertService, private router: Router,
-              private authService: AuthService, private cookieService: CookieService, private route: ActivatedRoute) {}
+              private authService: AuthService, private cookieService: CookieService) {}
 
   ngOnInit(): void {
-    this.authService.logout();
     this.firstAuthMobile = !this.cookieService.get('biometrics');
-    this.appAuthSubs = this.authService.appAuth.subscribe(data => this.checkAppAuth(data));
+    this.appAuthSubs = this.authService.success.subscribe(data => this.checkAppAuth(data));
   }
 
   private checkAppAuth(appAuth: AuthStatus) {
@@ -69,7 +68,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   isAuthSuccess() {
-    if (this.authService.isLogged) this.router.navigate(['/', 'main'], { relativeTo: this.route });
+    if (this.authService.isLogged) this.router.navigate(['/', 'main']);
   }
 
   ngOnDestroy() {

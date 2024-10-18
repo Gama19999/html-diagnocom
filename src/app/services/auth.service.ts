@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { Subject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
 
 import { environment } from '../../environments/environment';
@@ -10,17 +10,19 @@ import { ChainingDataService } from './chaining-data.service';
 import { MessageResponse } from '../models/message-response.model';
 import { AuthStatus } from '../models/auth-status.model';
 
-@Injectable({ providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class AuthService {
   private sessionTimeoutId: any;
   private sessionListener = () => { this.sessionTimeout(); };
   private authStatus: AuthStatus = new AuthStatus();
-  appAuth: BehaviorSubject<AuthStatus> = new BehaviorSubject(this.authStatus);
+  success: Subject<AuthStatus> = new Subject();
 
   constructor(private http: HttpClient, private cookieService: CookieService, private frameService: FrameService,
               private router: Router, private chainingDataService: ChainingDataService) {}
 
-  get isLogged() { return this.cookieService.get('token') && this.authStatus.authenticated; }
+  get isLogged() {
+    return this.cookieService.get('token') && this.authStatus.authenticated;
+  }
 
   browserAuth(data: any) {
     this.enableBiometrics(data);
@@ -39,7 +41,8 @@ export class AuthService {
     this.cookieService.set('token', success.data.token, 1);
     this.authStatus.wasRegistration = success.status == 201;
     if (environment.production) this.addSessionListener();
-    this.appAuth.next(this.authStatus);
+    this.success.next(this.authStatus);
+    console.log('Login success!');
   }
 
   private addSessionListener() {
@@ -51,7 +54,7 @@ export class AuthService {
     console.log(error);
     this.cookieService.delete('biometrics');
     this.authStatus.errorMessage = error.error.data;
-    this.appAuth.next(this.authStatus);
+    this.success.next(this.authStatus);
   }
 
   mobileAuth() {
@@ -67,7 +70,7 @@ export class AuthService {
     this.frameService.reset();
     this.authStatus.reset();
     if (environment.production) this.detachSessionListener();
-    this.router.navigate(['/']);
+    this.router.navigate(['/', 'login']);
     console.log('Logout success!');
   }
 

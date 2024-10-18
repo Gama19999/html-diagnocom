@@ -40,12 +40,12 @@ export class ChainingDataService {
     this.success.next(this.chainingData);
   }
 
-  private handleResult(resultRes: ResultResponse) {
+  handleResult(resultRes: ResultResponse) {
     this.resultData = resultRes;
     this.final.next(this.resultData);
   }
 
-  private handleFailure(failure: any) {
+  handleFailure(failure: any) {
     console.log(failure);
     this.error.next(failure.error);
   }

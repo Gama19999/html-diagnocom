@@ -34,7 +34,7 @@
 }
 
 .app-logo {
-  background: url("../../../assets/images/diagnocom.webp") 50% 50% / 100% 100% no-repeat;
+  background: url("../../../assets/images/icon/diagnocom.webp") 50% 50% / 100% 100% no-repeat;
   margin-left: 1rem;
   width: 2.7rem;
   height: 3rem;
@@ -81,5 +81,3 @@
   font-size: 1.5rem;
   margin-right: 0.5rem;
 }
-
-.hidden { display: none; }

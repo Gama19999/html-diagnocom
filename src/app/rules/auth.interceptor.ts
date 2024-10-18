@@ -3,7 +3,7 @@ import { inject } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 
 export const authInterceptor: HttpInterceptorFn = (request: HttpRequest<any>, next: HttpHandlerFn) => {
-  if (!request.url.includes('auth')) {
+  if (!request.url.includes('auth') && !request.url.includes('results/')) {
     request = request.clone({setHeaders: {'Authorization': inject(CookieService).get('token')}});
   }
   return next(request);
