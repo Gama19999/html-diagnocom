@@ -1,6 +1,8 @@
 export const environment = {
   production: false,
-  api: 'http://192.168.1.90:8080/api/',
+  api: 'http://127.0.0.1:8080/api/',
+  pdf_rules: 'http://127.0.0.1:9999/prod-rules/prod-rules.pdf',
   mobile: false,
-  sound: '../../assets/sounds/land3.mp3'
+  notification: './media/land3.mp3',
+  tap: './media/tap.mp3'
 };

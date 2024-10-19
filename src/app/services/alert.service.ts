@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { Howl } from 'howler';
-import {environment} from "../../environments/environment";
+
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AlertService {
   private notification: Howl;
+  private tap: Howl;
 
   constructor() {
-    this.notification = new Howl({
-      src: [environment.sound],
-      html5: true
-    });
+    this.notification = new Howl({ src: [environment.notification], html5: true });
+    this.tap = new Howl({ src: [environment.tap], html5: true});
   }
 
   success(msgService: MessageService, title: string, content: string) {
@@ -34,7 +34,7 @@ export class AlertService {
     msgService.add({severity: 'error', summary: 'Error', detail: content});
   }
 
-  notificationSound() {
-    this.notification.play();
-  }
+  notificationSound = () => this.notification.play();
+
+  tapSound = () => this.tap.play();
 }

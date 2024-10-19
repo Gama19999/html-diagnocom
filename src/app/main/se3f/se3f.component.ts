@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
 import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 
@@ -12,7 +12,7 @@ import { AlertService } from '../../services/alert.service';
   styleUrl: './se3f.component.css',
   providers: [MessageService]
 })
-export class Se3fComponent implements OnInit, OnDestroy {
+export class Se3fComponent implements OnInit, OnDestroy, AfterViewInit {
   private resultSubs!: Subscription;
   private errorSubs!: Subscription;
   private success: boolean = false;
@@ -32,6 +32,12 @@ export class Se3fComponent implements OnInit, OnDestroy {
       this.alertService.info(this.messageService, result.content['enfermedad'].txt, result.content['enfermedad'].value);
     });
     this.errorSubs = this.chainingDataService.error.subscribe(failure => this.alertService.warn(this.messageService, failure.data));
+  }
+
+  ngAfterViewInit() {
+    let optionList = document.getElementsByClassName('option');
+    for (let i = 0; i < optionList.length; i++)
+      optionList.item(i)!.addEventListener('click', () => this.alertService.tapSound());
   }
 
   validateChoice(clicked: string) {

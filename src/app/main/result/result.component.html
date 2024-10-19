@@ -23,7 +23,13 @@
   </div>
   <div class="result-controls full flex">
     <input type="button" class="btn" value="Inicio" (click)="goHome()" />
-    <input type="button" class="btn" value="Guardar resultado" (click)="printResult()" />
+    <span class="btn" *ngIf="!isMobile" (click)="saveAsPDF()">
+        <i class="pi pi-download"></i><i class="pi pi-file-pdf"></i>
+    </span>
+    <span class="btn" (click)="saveAsPicture()">
+      <i class="pi pi-download"></i><i class="pi pi-images"></i>
+    </span>
   </div>
+  <input type="hidden" id="saveAsPicture" (input)="saveAsPictureCompleted($event.target)">
   <p-toast [life]="3000" [breakpoints]="{'1000px': {width: '95%', right: '2.5%'}}" />
 </section>

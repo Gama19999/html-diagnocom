@@ -73,11 +73,14 @@
 }
 
 .result-controls .btn {
-  height: fit-content;
   margin-right: 2rem;
 }
 
 .pi {
-  font-size: 1.5rem;
   margin-right: 0.5rem;
+}
+
+.btn .pi {
+  font-size: 1rem;
+  font-weight: bold;
 }

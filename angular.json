@@ -48,7 +48,7 @@
               "src/styles.css"
             ],
             "scripts": [],
-            "allowedCommonJsDependencies": ["howler"]
+            "allowedCommonJsDependencies": ["howler", "dom-to-image"]
           },
           "configurations": {
             "mobile": {
@@ -92,6 +92,22 @@
                   "with": "src/environments/environment.prod.browser.ts"
                 }
               ]
+            },
+            "local": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "900kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kB",
+                  "maximumError": "4kB"
+                }
+              ],
+              "outputHashing": "all",
+              "fileReplacements": []
             },
             "development": {
               "optimization": false,

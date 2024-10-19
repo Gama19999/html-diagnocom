@@ -26,7 +26,7 @@ const routes: Routes = [
         { path: 'settings', component: SettingsComponent, title: 'DiagnoCom | Ajustes' }
       ]
   },
-  { path: 'result/:id', component: ResultComponent, resolve: { resultResolver } },
+  { path: 'result/:id', component: ResultComponent, resolve: { resultResolver }, title: 'SE | Resultado' },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: '**', redirectTo: 'main/home' }
 ];
