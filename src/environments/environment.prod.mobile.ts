@@ -6,5 +6,5 @@ export const environment = {
   mobile: true,
   notification: './media/land3.mp3',
   tap: './media/tap.mp3',
-  version: '2.4.0'
+  version: '2.4.1'
 };

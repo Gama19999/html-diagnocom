@@ -32,13 +32,13 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               {
-                "glob": "**/*",
-                "input": "src/assets/sounds",
+                "glob": "**/diagnocom.webp",
+                "input": "src/assets/images/icon/",
                 "output": "/media/"
               },
               {
-                "glob": "**/diagnocom.webp",
-                "input": "src/assets/images/icon/",
+                "glob": "**/*",
+                "input": "src/assets/sounds/",
                 "output": "/media/"
               }
             ],
