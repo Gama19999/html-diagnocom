@@ -103,6 +103,14 @@ app-home, app-se1f, app-se2f, app-se3f, app-result, app-settings {
 .urinaria-bg { background: url("./assets/images/pc/urinaria.webp") 50% 50% / 100% 100% no-repeat; }
 .cutanea-bg { background: url("./assets/images/pc/cutanea.webp") 50% 50% / 100% 100% no-repeat; }
 .settings-bg { background: url("./assets/images/pc/settings.webp") 0 50% / 180% 100% no-repeat; }
+.app-version {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  z-index: 100;
+}
 .btn {
   border: 0;
   border-radius: 15px;
@@ -203,8 +211,8 @@ input.ng-touched.ng-invalid {
     margin: 1rem 0 0 0 !important;
   }
   .result-controls .btn {
-    margin-right: 1rem !important;
-    padding: 0.5rem 1.5rem !important;
+    margin-right: 0.5rem !important;
+    padding: 0.5rem 1.2rem !important;
   }
   .result-controls .btn .pi {
     font-size: 1rem !important;

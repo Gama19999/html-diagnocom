@@ -19,8 +19,10 @@ import { ResultResponse } from '../../models/brb/result-response.model';
 export class ResultComponent implements OnInit, OnDestroy {
   private errorSubs!: Subscription;
   resultResponse!: ResultResponse;
-  isResolved: boolean = false;
   isMobile: boolean = environment.mobile;
+  isResolved: boolean = false;
+  link!: string;
+  version: string = environment.version;
 
   constructor(private chainingDataService: ChainingDataService, private frameService: FrameService,
               private messageService: MessageService, private alertService: AlertService, private route: ActivatedRoute) {}
@@ -29,6 +31,7 @@ export class ResultComponent implements OnInit, OnDestroy {
     this.checkForResolvedData();
     this.resultResponse = this.isResolved ? this.resultResponse : this.chainingDataService.resultData;
     this.errorSubs = this.chainingDataService.error.subscribe(failure => this.alertService.warn(this.messageService, failure.data));
+    this.link = environment.result_link + this.resultResponse.resultId;
   }
 
   private checkForResolvedData() {
@@ -87,6 +90,10 @@ export class ResultComponent implements OnInit, OnDestroy {
   saveAsPictureCompleted(input: any) {
     let result = (<HTMLInputElement> input).value;
     this.alertService.success(this.messageService, result, document.title);
+  }
+
+  shareLinkCopied() {
+    this.alertService.success(this.messageService, 'Se copió al portapapeles', 'el link del resultado!');
   }
 
   ngOnDestroy(): void {

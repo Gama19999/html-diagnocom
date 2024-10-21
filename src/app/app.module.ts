@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 import { ToastModule } from 'primeng/toast';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -44,6 +45,7 @@ import { SettingsComponent } from './main/settings/settings.component';
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    ClipboardModule,
     ToastModule,
     InputSwitchModule,
     ConfirmDialogModule,

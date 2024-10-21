@@ -29,7 +29,11 @@
     <span class="btn" (click)="saveAsPicture()">
       <i class="pi pi-download"></i><i class="pi pi-images"></i>
     </span>
+    <span class="btn" [cdkCopyToClipboard]="link" (cdkCopyToClipboardCopied)="shareLinkCopied()">
+        <i class="pi pi-share-alt"></i>
+    </span>
   </div>
   <input type="hidden" id="saveAsPicture" (input)="saveAsPictureCompleted($event.target)">
+    <ng-container *ngIf="isResolved"><span class="app-version">v{{ version }}</span></ng-container>
   <p-toast [life]="3000" [breakpoints]="{'1000px': {width: '95%', right: '2.5%'}}" />
 </section>

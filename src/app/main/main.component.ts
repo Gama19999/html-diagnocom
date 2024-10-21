@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+import { environment } from '../../environments/environment';
 import { FrameService } from '../services/frame.service';
 
 @Component({
@@ -8,6 +9,7 @@ import { FrameService } from '../services/frame.service';
   styleUrl: './main.component.css'
 })
 export class MainComponent {
+  version: string = environment.version;
 
   constructor(private frameService: FrameService) {
     this.frameService.goto('disclaimer', true);
