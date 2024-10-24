@@ -43,6 +43,12 @@ export class ResultComponent implements OnInit, OnDestroy {
     }
   }
 
+  resultLoad(input: any) {
+    let resultLoadURL = (<HTMLInputElement> input).value;
+    this.frameService.loadResult(resultLoadURL);
+    console.log('<<<DiagnoCom HTML>>> Loading result with ID: ', resultLoadURL.split('/')[2]);
+  }
+
   goHome() {
     if (this.isResolved) this.frameService.goto('disclaimer');
     else this.frameService.goto('home', true);

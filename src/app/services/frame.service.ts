@@ -10,12 +10,19 @@ export class FrameService {
 
   constructor(private router: Router, private chainingDataService: ChainingDataService) {}
 
+  loadResult(resultURL: string) {
+    this.router.navigate(['/']).then(() => this.router.navigate([resultURL]));
+  }
+
   goto(path: string, replaceCurrent: boolean = false) {
     switch (path) {
       case 'disclaimer': break;
       case 'home': this.home(); break;
       case 'settings': this.settings(); break;
-      case 'se3f': this.se3f();
+      case 'se3f': this.se3f(); break;
+      case 'main':
+        this.router.navigate(['/', 'main']);
+        return;
     }
     this.router.navigate(['/', 'main', path], {replaceUrl: replaceCurrent});
   }

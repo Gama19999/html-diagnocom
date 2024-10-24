@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { Subscription } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
@@ -7,6 +6,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { environment } from '../../environments/environment';
 import { AlertService } from '../services/alert.service';
 import { AuthService } from '../services/auth.service';
+import { FrameService } from '../services/frame.service';
 import { AuthStatus } from '../models/auth-status.model';
 
 @Component({
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   isBrowserAuth: boolean = false;
   firstAuthMobile!: boolean;
 
-  constructor(private messageService: MessageService, private alertService: AlertService, private router: Router,
+  constructor(private messageService: MessageService, private alertService: AlertService,private frameService: FrameService,
               private authService: AuthService, private cookieService: CookieService) {}
 
   ngOnInit(): void {
@@ -35,6 +35,12 @@ export class LoginComponent implements OnInit, OnDestroy {
     } else if (appAuth.errorMessage) {
       this.alertService.error(this.messageService, appAuth.errorMessage);
     }
+  }
+
+  resultLoad(input: any) {
+    let resultLoadURL = (<HTMLInputElement> input).value;
+    this.frameService.loadResult(resultLoadURL);
+    console.log('<<<DiagnoCom HTML>>> Loading result with ID: ', resultLoadURL.split('/')[2]);
   }
 
   authPrompt() {
@@ -68,7 +74,7 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   isAuthSuccess() {
-    if (this.authService.isLogged) this.router.navigate(['/', 'main']);
+    if (this.authService.isLogged) this.frameService.goto('main');
   }
 
   ngOnDestroy() {

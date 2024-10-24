@@ -15,4 +15,10 @@ export class MainComponent {
     this.frameService.goto('disclaimer', true);
   }
 
+  resultLoad(input: any) {
+    let resultLoadURL = (<HTMLInputElement> input).value;
+    this.frameService.loadResult(resultLoadURL);
+    console.log('<<<DiagnoCom HTML>>> Loading result with ID: ', resultLoadURL.split('/')[2]);
+  }
+
 }

@@ -16,7 +16,6 @@ import { AlertService } from '../../services/alert.service';
 })
 export class HomeComponent implements OnInit, OnDestroy {
   private userDataSubs!: Subscription;
-  isMobile: boolean = environment.mobile;
   pdfRules: string = environment.pdf_rules;
   username!: string;
   lastActivity!: Date;
